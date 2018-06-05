@@ -84,72 +84,105 @@
 
 </android.support.constraint.ConstraintLayout>
 -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical">
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/tool_bar"
+    android:layout_height="match_parent"
+    tools:context=".ActivityRecommend">
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:background="@color/colorBackground">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:src="@drawable/healery_logo"
+            />
+    </android.support.v7.widget.Toolbar>
 
-            <TextView
-                android:id="@+id/textView"
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:background="@color/colorButton"
+        android:padding="@dimen/button_padding"
+        android:text="@string/recommend_another"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/big_font_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></Button>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/button9">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:gravity="center"
-                android:text="@string/select_activity"
-                android:textSize="@dimen/big_font_size" />
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_1"
-                android:background="@drawable/bt_corner_round"
-                android:gravity="left|center_vertical"
-                android:padding="15dp"
-                android:text="영화관에 가서 영화 보기(임시)"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/normal_font_size" />
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:gravity="center"
+                    android:text="@string/select_activity"
+                    android:textSize="@dimen/big_font_size" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_1"
-                android:background="@drawable/bt_corner_round"
-                android:gravity="left|center_vertical"
-                android:padding="15dp"
-                android:text="카페가서 엄청 단 음료 마시기(임시)"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/normal_font_size" />
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_1"
+                    android:background="@drawable/bt_corner_round"
+                    android:gravity="left|center_vertical"
+                    android:padding="15dp"
+                    android:text="영화관에 가서 영화 보기(임시)"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/normal_font_size" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_1"
-                android:background="@drawable/bt_corner_round"
-                android:gravity="left|center_vertical"
-                android:padding="15dp"
-                android:text="30분 동안 뛰기(임시)"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/normal_font_size" />
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_1"
+                    android:background="@drawable/bt_corner_round"
+                    android:gravity="left|center_vertical"
+                    android:padding="15dp"
+                    android:text="카페가서 엄청 단 음료 마시기(임시)"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/normal_font_size" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_1"
+                    android:background="@drawable/bt_corner_round"
+                    android:gravity="left|center_vertical"
+                    android:padding="15dp"
+                    android:text="30분 동안 뛰기(임시)"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/normal_font_size" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

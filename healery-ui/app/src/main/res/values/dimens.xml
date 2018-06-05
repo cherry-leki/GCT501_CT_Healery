@@ -4,6 +4,7 @@
     <dimen name="margin_2">40dp</dimen>
     <dimen name="margin_3">50dp</dimen>
     <dimen name="margin_4">20dp</dimen>
+    <dimen name="button_padding">7dp</dimen>
     <dimen name="big_font_size">30dp</dimen>
     <dimen name="bigbig_font_size">40dp</dimen>
     <dimen name="normal_font_size">20dp</dimen>

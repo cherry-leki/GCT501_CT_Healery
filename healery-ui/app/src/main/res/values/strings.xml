@@ -16,7 +16,7 @@
     <string name="setting">환경설정</string>
 
     <string name="select_activity">활동 선택</string>
-
+    <string name="recommend_another">다른 활동 추천</string>
     <string name="activity_choiced">추천 활동</string>
     <string name="perform_please">추천 활동을 수행해주세요!</string>
     <string name="complete">Complete</string>
