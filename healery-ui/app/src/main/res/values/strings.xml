@@ -8,8 +8,14 @@
     <string name="heart_rate_normal_low">00</string>
     <string name="heart_rate_normal_high">00</string>
     <string name="heart_rate_my">나의 심박수</string>
+    <string name="stress_state_my">스트레스 상태</string>
+    <string name="stress_high">스트레스</string>
+    <string name="stress_one_spoon">약간의 스트레스</string>
+    <string name="stress_no">평온</string>
     <string name="tilde">~</string>
     <string name="go_recommend">심박수가 정상범위보다 높습니다.\n힐러리의 추천을 받아보세요.</string>
+    <string name="go_recommend_1">스트레스가 높은 상태입니다.\n힐러리의 추천을 받아보세요.</string>
+    <string name="go_recommend_2">약간 스트레스 받으셨네요.\n힐러리의 추천을 받아볼까요?</string>
 
     <string name="report">리포트</string>
     <string name="category_setting">카테고리 재설정</string>
