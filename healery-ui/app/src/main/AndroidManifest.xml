@@ -28,9 +28,6 @@
 
 
         </activity>
-        <activity android:name=".ActivityCompleted2">
-
-        </activity>
         <activity
             android:name=".ActivityMainNavi"
             android:label="@string/title_activity_main_navi"

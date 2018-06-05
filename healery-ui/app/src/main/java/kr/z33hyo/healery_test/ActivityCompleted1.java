@@ -18,7 +18,7 @@ public class ActivityCompleted1 extends Activity {
         Button buttonComplete = (Button) findViewById(R.id.button_complete);
         Button buttonYes = (Button) findViewById(R.id.button_yes);
         Button buttonNo = (Button)findViewById(R.id.button_no);
-        if (false) {
+        if (true) {
             txtview.setText(getResources().getString(R.string.completed_good));
             buttonYes.setVisibility(View.INVISIBLE);
             buttonNo.setVisibility(View.INVISIBLE);
