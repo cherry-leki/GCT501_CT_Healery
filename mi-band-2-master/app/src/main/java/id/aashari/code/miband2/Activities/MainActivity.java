@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import id.aashari.code.miband2.Helpers.CustomBluetoothProfile;
 import id.aashari.code.miband2.R;
@@ -43,6 +45,8 @@ public class MainActivity extends Activity {
     TextView txtState, txtByte;
     private String mDeviceName;
     private String mDeviceAddress;
+
+    Timer timer = new Timer();
 
 
     @Override
@@ -116,7 +120,15 @@ public class MainActivity extends Activity {
         btnGetHeartRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startScanHeartRate();
+                // 데이터를 1분에 한번씩 받아오도록 만든 것.
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        startScanHeartRate();
+                        System.out.println("hr work!");
+                    }
+                },0,30000);
+//                startScanHeartRate();
             }
         });
     }
@@ -144,7 +156,13 @@ public class MainActivity extends Activity {
     }
 
     void startScanHeartRate() {
-        txtByte.setText("...");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                txtByte.setText("...");
+            }
+        });
+//        txtByte.setText("...");
         BluetoothGattCharacteristic bchar = bluetoothGatt.getService(CustomBluetoothProfile.HeartRate.service)
                 .getCharacteristic(CustomBluetoothProfile.HeartRate.controlCharacteristic);
         bchar.setValue(new byte[]{21, 2, 1});
