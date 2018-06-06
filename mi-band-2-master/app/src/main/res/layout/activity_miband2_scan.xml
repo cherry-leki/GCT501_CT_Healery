@@ -12,7 +12,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start scan"
+            android:text="@string/button_stopScan"
             android:id="@+id/scan_start_button"
             android:layout_gravity="center_horizontal"/>
         <ProgressBar

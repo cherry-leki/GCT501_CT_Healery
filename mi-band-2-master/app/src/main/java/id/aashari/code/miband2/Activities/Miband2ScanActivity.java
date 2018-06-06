@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,15 +40,26 @@ public class Miband2ScanActivity extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
-    ListView listView;
+    private ListView scannedMiBand2List;
+    private Button startScanButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_miband2_scan);
 
-        listView = (ListView) findViewById(R.id.scan_miband2CandidatesList);
-
+        scannedMiBand2List = (ListView) findViewById(R.id.scan_miband2CandidatesList);
+        startScanButton = (Button) findViewById(R.id.scan_start_button);
+        startScanButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(startScanButton.getText().equals(getString(R.string.button_stopScan))) {
+                    scanLeDevice(false);
+                } else {
+                    scanLeDevice(true);
+                }
+            }
+        });
 
         mHandler = new Handler();
 
@@ -118,8 +130,8 @@ public class Miband2ScanActivity extends AppCompatActivity {
 
         // Initializes list view adapter.
         mLeDeviceListAdapter = new LeDeviceListAdapter();
-        listView.setAdapter(mLeDeviceListAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        scannedMiBand2List.setAdapter(mLeDeviceListAdapter);
+        scannedMiBand2List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final BluetoothDevice device = mLeDeviceListAdapter.getDevice(i);
@@ -153,6 +165,7 @@ public class Miband2ScanActivity extends AppCompatActivity {
         super.onPause();
         scanLeDevice(false);
         mLeDeviceListAdapter.clear();
+        startScanButton.setText(R.string.button_startScan);
     }
 
 
@@ -170,9 +183,11 @@ public class Miband2ScanActivity extends AppCompatActivity {
             }, SCAN_PERIOD);
 
             mScanning = true;
+            startScanButton.setText(R.string.button_stopScan);
             mBluetoothAdapter.startLeScan(mLeScanCallback);
         } else {
             mScanning = false;
+            startScanButton.setText(R.string.button_startScan);
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
         }
         invalidateOptionsMenu();
