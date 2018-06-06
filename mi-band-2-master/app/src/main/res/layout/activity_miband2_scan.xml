@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="siasia"
+            android:text="@string/scan_noteExplain"
             android:id="@+id/scan_noteExplain_textView"
             android:gravity="bottom"/>
     </LinearLayout>

@@ -44,9 +44,9 @@ public class Miband2ScanActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_device_scan);
+        setContentView(R.layout.activity_miband2_scan);
 
-        listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.scan_miband2CandidatesList);
 
 
         mHandler = new Handler();
