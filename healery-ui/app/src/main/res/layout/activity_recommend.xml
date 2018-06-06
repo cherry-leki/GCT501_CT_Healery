@@ -147,7 +147,7 @@
                     android:textSize="@dimen/big_font_size" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/recommendButton0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_1"
@@ -159,7 +159,7 @@
                     android:textSize="@dimen/normal_font_size" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/recommendButton1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_1"
@@ -171,7 +171,7 @@
                     android:textSize="@dimen/normal_font_size" />
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/recommendButton2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_1"

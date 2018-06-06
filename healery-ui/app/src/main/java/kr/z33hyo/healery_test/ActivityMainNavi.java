@@ -1,5 +1,6 @@
 package kr.z33hyo.healery_test;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class ActivityMainNavi extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,15 +26,6 @@ public class ActivityMainNavi extends AppCompatActivity
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -41,6 +34,16 @@ public class ActivityMainNavi extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Button btn_recommend = (Button) findViewById(R.id.recommendButton);
+        btn_recommend.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(ActivityMainNavi.this, ActivityRecommend.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -82,11 +85,12 @@ public class ActivityMainNavi extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_report) {
-            // Handle the camera action
-        } else if (id == R.id.nav_category_setting) {
+        }/* else if (id == R.id.nav_category_setting) {
 
-        } else if (id == R.id.nav_setting) {
-
+        } */else if (id == R.id.nav_setting) {
+            Intent intent = new Intent(ActivityMainNavi.this, First.class);
+            intent.putExtra("frommain", true);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

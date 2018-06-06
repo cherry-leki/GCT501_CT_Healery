@@ -7,8 +7,9 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ActivityMainNavi"
     tools:showIn="@layout/app_bar_activity_main_navi">
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/recommendButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
@@ -19,7 +20,7 @@
         android:textSize="@dimen/big_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></Button>
+        app:layout_constraintStart_toStartOf="parent" />
     <!--<TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -99,14 +100,15 @@
         android:adjustViewBounds="true"
         android:src="@drawable/stress_one_spoon"
         android:padding="@dimen/margin_1"
-        app:layout_constraintTop_toBottomOf="@id/textView6"/>
+        app:layout_constraintTop_toBottomOf="@id/textView6"
+        app:layout_constraintBottom_toTopOf="@id/textView7"/>
     <TextView
         android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="@string/go_recommend_2"
-        app:layout_constraintBottom_toTopOf="@id/button"
+        app:layout_constraintBottom_toTopOf="@id/recommendButton"
         android:textSize="@dimen/normal_font_size"
         android:layout_marginBottom="@dimen/margin_1"
         android:layout_marginHorizontal="@dimen/margin_1"/>

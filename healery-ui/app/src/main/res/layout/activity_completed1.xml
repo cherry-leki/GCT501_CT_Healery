@@ -13,54 +13,54 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/beforeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/completed_before_beat"
+        android:text="@string/completed_before_state"
         android:textSize="@dimen/big_font_size"
         android:paddingTop="@dimen/margin_4"
         android:paddingLeft="@dimen/margin_1"
         app:layout_constraintTop_toBottomOf="@id/include"/>
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/beforeStateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="00"
         android:gravity="center"
         android:textSize="@dimen/bigbig_font_size"
-        app:layout_constraintTop_toBottomOf="@id/textView7" />
+        app:layout_constraintTop_toBottomOf="@id/beforeTextView" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/nowTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/completed_now_beat"
+        android:text="@string/completed_now_state"
         android:paddingTop="@dimen/margin_4"
         android:paddingLeft="@dimen/margin_1"
         android:textSize="@dimen/big_font_size"
-        app:layout_constraintTop_toBottomOf="@id/textView8" />
+        app:layout_constraintTop_toBottomOf="@id/beforeStateTextView" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/nowStateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="00"
         android:gravity="center"
         android:textSize="@dimen/bigbig_font_size"
-        app:layout_constraintTop_toBottomOf="@id/textView9" />
+        app:layout_constraintTop_toBottomOf="@id/nowTextView" />
 
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textView10"
+        app:layout_constraintTop_toBottomOf="@id/nowStateTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         android:gravity="center_vertical">
 
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/resultTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/completed_good"
@@ -73,7 +73,7 @@
             android:layout_marginTop="@dimen/margin_1"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/textView11">
+            app:layout_constraintTop_toBottomOf="@id/resultTextView">
 
             <Button
                 android:id="@+id/button_yes"
@@ -109,7 +109,7 @@
             android:text="@string/complete"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/big_font_size"
-            app:layout_constraintTop_toBottomOf="@id/textView11"
+            app:layout_constraintTop_toBottomOf="@id/resultTextView"
             tools:layout_editor_absoluteX="40dp" />
 
 

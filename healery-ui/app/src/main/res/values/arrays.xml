@@ -7,12 +7,12 @@
         <item>명상</item>
         <item>산책</item>
         <item>음악 감상</item>
-        <item>디저트</item>
+        <item>카페</item>
         <item>영화</item>
         <item>음식</item>
         <item>쇼핑</item>
         <item>수면</item>
         <item>노래부르기</item>
-
+        <item>커뮤니케이션</item>
     </string-array>
 </resources>

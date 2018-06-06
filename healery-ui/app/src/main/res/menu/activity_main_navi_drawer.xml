@@ -7,9 +7,11 @@
         <item
             android:id="@+id/nav_report"
             android:title="@string/report" />
+        <!--
         <item
             android:id="@+id/nav_category_setting"
             android:title="@string/category_setting" />
+        -->
         <item
             android:id="@+id/nav_setting"
             android:title="@string/setting" />

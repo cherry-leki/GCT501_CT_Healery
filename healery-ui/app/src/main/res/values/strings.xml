@@ -30,7 +30,9 @@
 
     <string name="completed_before_beat">활동 전 심박수</string>
     <string name="completed_now_beat">현재 심박수</string>
-    <string name="completed_good">축하합니다. 스트레스 지수가 낮아졌어요!</string>
+    <string name="completed_before_state">활동 전 스트레스 상태</string>
+    <string name="completed_now_state">현재 스트레스 상태</string>
+    <string name="completed_good">축하합니다. 스트레스가 낮아졌어요!</string>
     <string name="completed_bad">효과가 없네요. 다른 활동을 추천 받으시겠어요?</string>
     <string name="main_recommend">추천 받기</string>
     <string name="yes">Yes</string>

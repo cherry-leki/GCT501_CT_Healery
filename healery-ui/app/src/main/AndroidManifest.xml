@@ -12,6 +12,11 @@
         <activity android:name=".First">
             <!-- android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"> -->
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ActivityRecommend">
 
@@ -28,11 +33,6 @@
             android:name=".ActivityMainNavi"
             android:label="@string/title_activity_main_navi"
             android:theme="@style/AppTheme.NoTitle">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
