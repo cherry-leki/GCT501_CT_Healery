@@ -86,13 +86,6 @@
                 android:title="@string/mi2_prefs_button_press_count_match_delay" />
         </PreferenceScreen>
 
-        <EditTextPreference
-            android:defaultValue="0"
-            android:inputType="number"
-            android:key="mi_reserve_alarm_calendar"
-            android:maxLength="1"
-            android:digits="0123"
-            android:title="@string/miband_prefs_reserve_alarm_calendar" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="mi_hr_sleep_detection"
@@ -267,153 +260,6 @@
 
         <PreferenceScreen
             android:key="vibration_profile_key"
-            android:title="@string/pref_screen_notification_profile_sms"
-            android:persistent="false">
-
-            <!-- workaround for missing toolbar -->
-            <PreferenceCategory
-                android:title="@string/pref_screen_notification_profile_sms"
-            />
-
-            <ListPreference
-                android:defaultValue="@string/p_staccato"
-                android:entries="@array/vibration_profile"
-                android:entryValues="@array/vibration_profile_values"
-                android:key="mi_vibration_profile_generic_sms"
-                android:title="@string/miband_prefs_vibration"
-                android:summary="%s" />
-
-            <EditTextPreference
-                android:defaultValue="3"
-                android:inputType="number"
-                android:key="mi_vibration_count_generic_sms"
-                android:maxLength="1"
-                android:title="@string/pref_title_notifications_repetitions" />
-
-            <Preference
-                android:key="mi_try_generic_sms"
-                android:persistent="false"
-                android:title="@string/vibration_try"/>
-        </PreferenceScreen>
-
-        <PreferenceScreen
-            android:key="vibration_profile_key"
-            android:title="@string/pref_screen_notification_profile_incoming_call"
-            android:persistent="false">
-
-            <!-- workaround for missing toolbar -->
-            <PreferenceCategory
-                android:title="@string/pref_screen_notification_profile_incoming_call"
-                />
-
-            <ListPreference
-                android:defaultValue="@string/p_ring"
-                android:entries="@array/vibration_profile"
-                android:entryValues="@array/vibration_profile_values"
-                android:key="mi_vibration_profile_incoming_call"
-                android:title="@string/miband_prefs_vibration"
-                android:summary="%s" />
-
-            <EditTextPreference
-                android:defaultValue="60"
-                android:inputType="number"
-                android:key="mi_vibration_count_incoming_call"
-                android:maxLength="2"
-                android:title="@string/pref_title_notifications_repetitions" />
-        </PreferenceScreen>
-
-        <PreferenceScreen
-            android:key="vibration_profile_key"
-            android:title="@string/pref_screen_notification_profile_email"
-            android:persistent="false">
-
-            <!-- workaround for missing toolbar -->
-            <PreferenceCategory
-                android:title="@string/pref_screen_notification_profile_email"
-                />
-
-            <ListPreference
-                android:defaultValue="@string/p_medium"
-                android:entries="@array/vibration_profile"
-                android:entryValues="@array/vibration_profile_values"
-                android:key="mi_vibration_profile_generic_email"
-                android:title="@string/miband_prefs_vibration"
-                android:summary="%s" />
-
-            <EditTextPreference
-                android:defaultValue="2"
-                android:inputType="number"
-                android:key="mi_vibration_count_generic_email"
-                android:maxLength="1"
-                android:title="@string/pref_title_notifications_repetitions" />
-            <Preference
-                android:key="mi_try_generic_email"
-                android:persistent="false"
-                android:title="@string/vibration_try"/>
-        </PreferenceScreen>
-
-        <PreferenceScreen
-            android:key="vibration_profile_key"
-            android:title="@string/pref_screen_notification_profile_generic_chat"
-            android:persistent="false">
-
-            <!-- workaround for missing toolbar -->
-            <PreferenceCategory
-                android:title="@string/pref_screen_notification_profile_generic_chat"
-                />
-
-            <ListPreference
-                android:defaultValue="@string/p_waterdrop"
-                android:entries="@array/vibration_profile"
-                android:entryValues="@array/vibration_profile_values"
-                android:key="mi_vibration_profile_generic_chat"
-                android:title="@string/miband_prefs_vibration"
-                android:summary="%s" />
-
-            <EditTextPreference
-                android:defaultValue="3"
-                android:inputType="number"
-                android:key="mi_vibration_count_generic_chat"
-                android:maxLength="1"
-                android:title="@string/pref_title_notifications_repetitions" />
-            <Preference
-                android:key="mi_try_generic_chat"
-                android:persistent="false"
-                android:title="@string/vibration_try"/>
-        </PreferenceScreen>
-
-        <PreferenceScreen
-            android:key="vibration_profile_key"
-            android:title="@string/pref_screen_notification_profile_generic_social"
-            android:persistent="false">
-
-            <!-- workaround for missing toolbar -->
-            <PreferenceCategory
-                android:title="@string/pref_screen_notification_profile_generic_social"
-                />
-
-            <ListPreference
-                android:defaultValue="@string/p_waterdrop"
-                android:entries="@array/vibration_profile"
-                android:entryValues="@array/vibration_profile_values"
-                android:key="mi_vibration_profile_generic_social"
-                android:title="@string/miband_prefs_vibration"
-                android:summary="%s" />
-
-            <EditTextPreference
-                android:defaultValue="3"
-                android:inputType="number"
-                android:key="mi_vibration_count_generic_social"
-                android:maxLength="1"
-                android:title="@string/pref_title_notifications_repetitions" />
-            <Preference
-                android:key="mi_try_generic_social"
-                android:persistent="false"
-                android:title="@string/vibration_try"/>
-        </PreferenceScreen>
-
-        <PreferenceScreen
-            android:key="vibration_profile_key"
             android:title="@string/pref_screen_notification_profile_alarm_clock"
             android:persistent="false">
 
@@ -439,36 +285,6 @@
             <Preference
                 android:key="mi_try_generic_alarm_clock"
                 android:persistent="false"
-                android:title="@string/vibration_try"/>
-        </PreferenceScreen>
-
-        <PreferenceScreen
-            android:key="vibration_profile_key"
-            android:title="@string/pref_screen_notification_profile_generic_navigation"
-            android:persistent="false">
-
-            <!-- workaround for missing toolbar -->
-            <PreferenceCategory
-                android:title="@string/pref_screen_notification_profile_generic_navigation"
-                />
-
-            <ListPreference
-                android:defaultValue="@string/p_waterdrop"
-                android:entries="@array/vibration_profile"
-                android:entryValues="@array/vibration_profile_values"
-                android:key="mi_vibration_profile_generic_navigation"
-                android:title="@string/miband_prefs_vibration"
-                android:summary="%s" />
-
-            <EditTextPreference
-                android:defaultValue="3"
-                android:inputType="number"
-                android:key="mi_vibration_count_generic_navigation"
-                android:maxLength="1"
-                android:title="@string/pref_title_notifications_repetitions" />
-            <Preference
-                android:persistent="false"
-                android:key="mi_try_generic_navigation"
                 android:title="@string/vibration_try"/>
         </PreferenceScreen>
 
