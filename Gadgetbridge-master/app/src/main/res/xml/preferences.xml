@@ -104,59 +104,9 @@
     <PreferenceCategory
         android:key="pref_key_notifications"
         android:title="@string/pref_header_notifications">
-
-        <ListPreference
-            android:defaultValue="always"
-            android:entries="@array/notification_mode_toggle"
-            android:entryValues="@array/notification_mode_values_toggle"
-            android:key="notification_mode_calls"
-            android:title="@string/pref_title_notifications_call"
-            android:summary="%s" />
-
-        <ListPreference
-            android:defaultValue="when_screen_off"
-            android:entries="@array/notification_mode"
-            android:entryValues="@array/notification_mode_values"
-            android:key="notification_mode_sms"
-            android:title="@string/pref_title_notifications_sms"
-            android:summary="%s" />
-
-        <Preference
-            android:key="notifications_generic"
-            android:title="@string/pref_title_notifications_generic" />
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="notifications_generic_whenscreenon"
-            android:title="@string/pref_title_whenscreenon" />
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="transliteration"
-            android:summary="@string/pref_summary_transliteration"
-            android:title="@string/pref_title_transliteration"
-            />
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="notification_filter"
-            android:summary="@string/pref_summary_notification_filter"
-            android:title="@string/pref_title_notification_filter" />
-
         <Preference
             android:key="pref_key_blacklist"
             android:title="@string/pref_blacklist" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/pref_header_privacy">
-    <ListPreference
-        android:defaultValue="@string/p_call_privacy_mode_off"
-        android:key="pref_call_privacy_mode"
-        android:title="@string/pref_title_call_privacy_mode"
-        android:entries="@array/pref_call_privacy_mode"
-        android:entryValues="@array/pref_call_privacy_mode_values"
-        android:summary="%s" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -184,13 +134,5 @@
             android:maxLength="3"
             android:title="@string/pref_title_auto_export_interval"
             android:summary="@string/pref_summary_auto_export_interval"/>
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:key="pref_key_development"
-        android:title="@string/pref_header_development">
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="log_to_file"
-            android:title="@string/pref_write_logfiles" />
     </PreferenceCategory>
 </PreferenceScreen>

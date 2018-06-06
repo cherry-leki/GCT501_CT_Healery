@@ -84,15 +84,7 @@ public class SettingsActivity extends AbstractSettingsActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        Preference pref = findPreference("notifications_generic");
-        pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            public boolean onPreferenceClick(Preference preference) {
-                Intent enableIntent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-                startActivity(enableIntent);
-                return true;
-            }
-        });
-        pref = findPreference("pref_key_miband");
+        Preference pref = findPreference("pref_key_miband");
         pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 Intent enableIntent = new Intent(SettingsActivity.this, MiBandPreferencesActivity.class);
@@ -108,28 +100,6 @@ public class SettingsActivity extends AbstractSettingsActivity {
                 startActivity(enableIntent);
                 return true;
             }
-        });
-
-        pref = findPreference("log_to_file");
-        pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newVal) {
-                boolean doEnable = Boolean.TRUE.equals(newVal);
-                try {
-                    if (doEnable) {
-                        FileUtils.getExternalFilesDir(); // ensures that it is created
-                    }
-                    GBApplication.setupLogging(doEnable);
-                } catch (IOException ex) {
-                    GB.toast(getApplicationContext(),
-                            getString(R.string.error_creating_directory_for_logfiles, ex.getLocalizedMessage()),
-                            Toast.LENGTH_LONG,
-                            GB.ERROR,
-                            ex);
-                }
-                return true;
-            }
-
         });
 
         pref = findPreference("language");
