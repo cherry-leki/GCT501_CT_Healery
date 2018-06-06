@@ -189,6 +189,8 @@ public class ChartsActivity extends AbstractGBFragmentActivity implements Charts
                 handleNextButtonClicked();
             }
         });
+
+        fetchActivityData();
     }
 
     private String formatDetailedDuration() {
