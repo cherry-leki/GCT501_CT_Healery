@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         initializeObjects();
-        initilaizeComponents();
+        initializeComponents();
         initializeEvents();
 
         getBoundedDevice();
@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
-    void initilaizeComponents() {
+    void initializeComponents() {
         btnStartConnecting = (Button) findViewById(R.id.btnStartConnecting);
         btnGetBatteryInfo = (Button) findViewById(R.id.btnGetBatteryInfo);
         btnWalkingInfo = (Button) findViewById(R.id.btnWalkingInfo);
