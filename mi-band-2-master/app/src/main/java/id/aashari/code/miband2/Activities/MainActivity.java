@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
         btnGetHeartRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 데이터를 1분에 한번씩 받아오도록 만든 것.
+                // 데이터를 30초에 한번씩 받아오도록 만든 것.
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
