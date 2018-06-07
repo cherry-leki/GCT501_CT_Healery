@@ -45,7 +45,7 @@
         android:id="@+id/nowStateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="00"
+        android:text="@string/stress_high"
         android:gravity="center"
         android:textSize="@dimen/bigbig_font_size"
         app:layout_constraintTop_toBottomOf="@id/nowTextView" />

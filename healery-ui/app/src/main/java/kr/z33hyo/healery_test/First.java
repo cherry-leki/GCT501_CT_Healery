@@ -34,9 +34,15 @@ public class First extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (setting.contains("setting1") && intent.hasExtra("frommain")==false){
+            SharedPreferences actvt = getSharedPreferences("activity", 0);
             intent = new Intent(First.this, ActivityMainNavi.class);
             startActivity(intent);
+            if(actvt.contains("select")){
+                intent = new Intent(First.this, ActivityPerform.class);
+                startActivity(intent);
+            }
             finish();
+            return;
         }
         setContentView(R.layout.activity_first);
         GridView gridView = (GridView) findViewById(R.id.category_gridview);
@@ -92,12 +98,16 @@ public class First extends AppCompatActivity {
                 editor.putBoolean("female",female);
                 editor.putString("name",((EditText)findViewById(R.id.nameEditText)).getText().toString());
                 editor.putInt("age",Integer.parseInt(age));
+                for (int i=0;i<DetailString.n;i++){
+                    editor.putInt("weight"+String.valueOf(i),DetailString.defaultWeight);
+                }
                 editor.commit();
                 if (getIntent().hasExtra("frommain")==false) {
                     Intent intent = new Intent(First.this, ActivityMainNavi.class);
                     startActivity(intent);
                 }
                 finish();
+                return;
             }
         });
         /*ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_multiple_choice, items);

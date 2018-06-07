@@ -106,7 +106,7 @@
     </android.support.v7.widget.Toolbar>
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/otherButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
@@ -124,7 +124,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toTopOf="@id/button9">
+        app:layout_constraintBottom_toTopOf="@id/otherButton">
 
 
         <ScrollView
@@ -150,7 +150,7 @@
                     android:id="@+id/recommendButton0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_1"
+                    android:layout_marginHorizontal="@dimen/margin_4"
                     android:background="@drawable/bt_corner_round"
                     android:gravity="left|center_vertical"
                     android:padding="15dp"
@@ -162,7 +162,8 @@
                     android:id="@+id/recommendButton1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_1"
+                    android:layout_marginHorizontal="@dimen/margin_4"
+                    android:layout_marginVertical="@dimen/margin_4"
                     android:background="@drawable/bt_corner_round"
                     android:gravity="left|center_vertical"
                     android:padding="15dp"
@@ -174,7 +175,7 @@
                     android:id="@+id/recommendButton2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_1"
+                    android:layout_marginHorizontal="@dimen/margin_4"
                     android:background="@drawable/bt_corner_round"
                     android:gravity="left|center_vertical"
                     android:padding="15dp"
