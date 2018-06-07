@@ -109,7 +109,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginTop="@dimen/margin_2"
             android:layout_marginHorizontal="@dimen/margin_1"
             android:text="@string/ask_preference"
             android:textSize="@dimen/big_font_size"
