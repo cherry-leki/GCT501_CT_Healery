@@ -2,6 +2,7 @@ package kr.z33hyo.healery_test;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -14,8 +15,10 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +47,15 @@ public class First extends AppCompatActivity {
             String tmp = "";
             for(int i=0;i<items.size();i++) tmp = tmp+"0";
             gridView.setAdapter(new GridAdapter(items, setting.getString("category", tmp)));
+            EditText nameEditText = (EditText) findViewById(R.id.nameEditText);
+            RadioButton maleRadioButton = (RadioButton) findViewById(R.id.maleRadioButton);
+            RadioButton femaleRadioButton = (RadioButton) findViewById(R.id.femaleRadioButton);
+            EditText ageEditText = (EditText) findViewById(R.id.ageEditText);
+            nameEditText.setText(setting.getString("name", ""));
+            maleRadioButton.setChecked(setting.getBoolean("male",false));
+            femaleRadioButton.setChecked(setting.getBoolean("female",false));
+            ageEditText.setText(String.valueOf(setting.getInt("age",-1)));
+            if (ageEditText.getText().toString()=="-1") ageEditText.setText("");
         }
         else gridView.setAdapter(new GridAdapter(items));
 
@@ -52,6 +64,19 @@ public class First extends AppCompatActivity {
         btn_complete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                boolean male = ((RadioButton)findViewById(R.id.maleRadioButton)).isChecked();
+                boolean female = ((RadioButton)findViewById(R.id.femaleRadioButton)).isChecked();
+                if (!male && !female){
+                    Toast.makeText(getApplicationContext(),"성별을 체크해주세요.",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                boolean flag=true;
+                String age = ((EditText)findViewById(R.id.ageEditText)).getText().toString();
+                if (age.length()==0) flag=false;
+                if(flag==false){
+                    Toast.makeText(getApplicationContext(),"나이를 제대로 입력해주세요.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 SharedPreferences setting = getSharedPreferences("setting", 0);
                 SharedPreferences.Editor editor = setting.edit();
                 GridView gridView = (GridView)findViewById(R.id.category_gridview);
@@ -63,6 +88,10 @@ public class First extends AppCompatActivity {
                 }
                 editor.putBoolean("setting1", true);
                 editor.putString("category",categorySetting);
+                editor.putBoolean("male", male);
+                editor.putBoolean("female",female);
+                editor.putString("name",((EditText)findViewById(R.id.nameEditText)).getText().toString());
+                editor.putInt("age",Integer.parseInt(age));
                 editor.commit();
                 if (getIntent().hasExtra("frommain")==false) {
                     Intent intent = new Intent(First.this, ActivityMainNavi.class);

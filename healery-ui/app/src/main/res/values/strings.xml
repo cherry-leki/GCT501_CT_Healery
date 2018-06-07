@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Healery_Test</string>
 
+    <string name="ask_name">당신의 이름은?</string>
+    <string name="ask_gender">성별</string>
+    <string name="gender_male">남</string>
+    <string name="gender_female">여</string>
+    <string name="ask_age">나이</string>
     <string name="ask_preference">당신의 취향은?</string>
     <string name="preference_assist">3~4가지를 선택해주세요.</string>
     <string name="select_complete">선택 완료</string>
@@ -14,12 +19,15 @@
     <string name="stress_no">평온</string>
     <string name="tilde">~</string>
     <string name="go_recommend">심박수가 정상범위보다 높습니다.\n힐러리의 추천을 받아보세요.</string>
-    <string name="go_recommend_1">스트레스가 높은 상태입니다.\n힐러리의 추천을 받아보세요.</string>
-    <string name="go_recommend_2">약간 스트레스 받으셨네요.\n힐러리의 추천을 받아볼까요?</string>
+    <string name="go_recommend_high">스트레스가 높은 상태입니다.\n힐러리의 추천을 받아보세요.</string>
+    <string name="go_recommend_one_spoon">약간 스트레스 받으셨네요.\n힐러리의 추천을 받아볼까요?</string>
+    <string name="go_recommend_no">힐러리의 추천을 받아볼까요?</string>
 
     <string name="report">리포트</string>
     <string name="category_setting">카테고리 재설정</string>
     <string name="setting">환경설정</string>
+    <string name="greeting">님, 오늘도 즐거운 하루 보내세요!</string>
+    <string name="greeting2">오늘도 즐거운 하루 보내세요!</string>
 
     <string name="select_activity">활동 선택</string>
     <string name="recommend_another">다른 활동 추천</string>

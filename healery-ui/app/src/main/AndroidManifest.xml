@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoTitle">
-        <activity android:name=".First">
+        <activity android:name=".First"
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait">
             <!-- android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"> -->
 
             <intent-filter>

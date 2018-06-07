@@ -2,6 +2,7 @@ package kr.z33hyo.healery_test;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,9 @@ public class ActivityCompleted1 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed1);
-
+        TextView txtview_before = (TextView) findViewById(R.id.beforeStateTextView);
+        SharedPreferences actvt = getSharedPreferences("activity",0);
+        txtview_before.setText(actvt.getString("beforeStressState",""));
         TextView txtview = (TextView) findViewById(R.id.resultTextView);
         Button btn_complete = (Button) findViewById(R.id.button_complete);
         Button btn_yes = (Button) findViewById(R.id.button_yes);

@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/section1_group"
+        >
         <item
             android:id="@+id/nav_report"
             android:title="@string/report" />
@@ -15,6 +18,11 @@
         <item
             android:id="@+id/nav_setting"
             android:title="@string/setting" />
+    </group>
+    <group android:id="@+id/section2_group">
+        <item
+            android:id="@+id/nav_initialize"
+            android:title="앱 초기화" />
     </group>
     <!--
     <item android:title="Communicate">

@@ -35,14 +35,85 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include">
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_1"
+            android:text="@string/ask_name"
+            android:textSize="@dimen/big_font_size"/>
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_1"
+            android:textSize="@dimen/normal_font_size"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/nameTextView"
+            app:layout_constraintLeft_toRightOf="@id/nameTextView"
+            app:layout_constraintRight_toRightOf="parent"/>
+        <TextView
+            android:id="@+id/genderTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/big_font_size"
+            android:text="@string/ask_gender"
+            android:paddingHorizontal="@dimen/margin_1"
+            android:layout_marginTop="@dimen/margin_1"
+            app:layout_constraintTop_toBottomOf="@id/nameEditText"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ask_age"
+            android:id="@+id/ageTextView"
+            android:textSize="@dimen/big_font_size"
+            android:layout_marginTop="@dimen/margin_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameEditText"
+            app:layout_constraintHorizontal_bias="0.6"/>
 
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toRightOf="@id/genderTextView"
+            app:layout_constraintRight_toLeftOf="@id/ageTextView"
+            app:layout_constraintBottom_toBottomOf="@id/genderTextView">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender_male"
+                android:id="@+id/maleRadioButton"
+                android:textSize="@dimen/normal_font_size"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender_female"
+                android:id="@+id/femaleRadioButton"
+                android:textSize="@dimen/normal_font_size"/>
+        </RadioGroup>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/normal_font_size"
+            android:id="@+id/ageEditText"
+            android:inputType="number"
+            android:maxLength="3"
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/margin_1"
+            app:layout_constraintLeft_toRightOf="@id/ageTextView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/ageTextView"/>
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
             android:layout_marginHorizontal="@dimen/margin_1"
             android:text="@string/ask_preference"
-            android:textSize="@dimen/big_font_size" />
+            android:textSize="@dimen/big_font_size"
+            app:layout_constraintTop_toBottomOf="@id/genderTextView"/>
 
         <TextView
             android:id="@+id/textView3"
