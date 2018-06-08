@@ -186,11 +186,11 @@ public class ControlCenterv2 extends AppCompatActivity
          * Ask for permission to intercept notifications on first run.
          */
         Prefs prefs = GBApplication.getPrefs();
-        if (prefs.getBoolean("firstrun", true)) {
-            prefs.getPreferences().edit().putBoolean("firstrun", false).apply();
-            Intent enableIntent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-            startActivity(enableIntent);
-        }
+//        if (prefs.getBoolean("firstrun", true)) {
+//            prefs.getPreferences().edit().putBoolean("firstrun", false).apply();
+//            Intent enableIntent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+//            startActivity(enableIntent);
+//        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkAndRequestPermissions();
         }

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import healery.gadgetbridge.R;
+import healery.gadgetbridge.activities.ControlCenterv2;
 
 public class First extends AppCompatActivity {
 
@@ -105,7 +106,7 @@ public class First extends AppCompatActivity {
                 }
                 editor.commit();
                 if (getIntent().hasExtra("frommain")==false) {
-                    Intent intent = new Intent(First.this, ActivityMainNavi.class);
+                    Intent intent = new Intent(First.this, ControlCenterv2.class);
                     startActivity(intent);
                 }
                 finish();
