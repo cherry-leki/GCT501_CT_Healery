@@ -36,15 +36,23 @@
             android:textSize="@dimen/big_font_size"
             android:layout_marginVertical="@dimen/margin_1"
             app:layout_constraintTop_toBottomOf="@+id/textView4"/>
+        <ImageView
+            android:id="@+id/assistImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/textView6"
+            app:layout_constraintTop_toBottomOf="@id/selectedTextView"
+            android:paddingHorizontal="@dimen/margin_1"
+            android:adjustViewBounds="true"/>
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="@dimen/margin_2"
+            android:layout_marginTop="@dimen/margin_4"
             android:text="@string/perform_please"
             android:textSize="@dimen/big_font_size"
-            app:layout_constraintTop_toBottomOf="@+id/selectedTextView"/>
+            app:layout_constraintTop_toBottomOf="@+id/assistImageView"/>
 
         <Button
             android:id="@+id/performCompleteButton"

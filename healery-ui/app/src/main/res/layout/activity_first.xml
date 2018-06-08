@@ -61,24 +61,14 @@
             android:paddingHorizontal="@dimen/margin_1"
             android:layout_marginTop="@dimen/margin_1"
             app:layout_constraintTop_toBottomOf="@id/nameEditText"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ask_age"
-            android:id="@+id/ageTextView"
-            android:textSize="@dimen/big_font_size"
-            android:layout_marginTop="@dimen/margin_1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameEditText"
-            app:layout_constraintHorizontal_bias="0.6"/>
+
 
         <RadioGroup
+            android:id="@+id/genderRadioGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintLeft_toRightOf="@id/genderTextView"
-            app:layout_constraintRight_toLeftOf="@id/ageTextView"
             app:layout_constraintBottom_toBottomOf="@id/genderTextView">
             <RadioButton
                 android:layout_width="wrap_content"
@@ -93,6 +83,15 @@
                 android:id="@+id/femaleRadioButton"
                 android:textSize="@dimen/normal_font_size"/>
         </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ask_age"
+            android:id="@+id/ageTextView"
+            android:textSize="@dimen/big_font_size"
+            android:layout_marginTop="@dimen/margin_1"
+            android:paddingHorizontal="@dimen/margin_1"
+            app:layout_constraintTop_toBottomOf="@id/genderTextView"/>
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -103,17 +102,25 @@
             android:gravity="center"
             android:layout_marginHorizontal="@dimen/margin_1"
             app:layout_constraintLeft_toRightOf="@id/ageTextView"
+            app:layout_constraintBottom_toBottomOf="@id/ageTextView"
+            app:layout_constraintRight_toLeftOf="@id/tmpTextView"/>
+        <TextView
+            android:id="@+id/tmpTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/ageTextView"/>
+            app:layout_constraintHorizontal_bias="0.7"/>
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_2"
+            android:layout_marginTop="@dimen/margin_1"
             android:layout_marginHorizontal="@dimen/margin_1"
             android:text="@string/ask_preference"
             android:textSize="@dimen/big_font_size"
-            app:layout_constraintTop_toBottomOf="@id/genderTextView"/>
+            app:layout_constraintTop_toBottomOf="@id/ageTextView"/>
 
         <TextView
             android:id="@+id/textView3"
