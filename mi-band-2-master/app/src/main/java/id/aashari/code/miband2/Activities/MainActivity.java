@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import id.aashari.code.miband2.Helpers.CustomBluetoothProfile;
 import id.aashari.code.miband2.R;
@@ -44,6 +46,8 @@ public class MainActivity extends Activity {
     private String mDeviceName;
     private String mDeviceAddress;
 
+    Timer timer = new Timer();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +55,12 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         initializeObjects();
-        initilaizeComponents();
+        initializeComponents();
         initializeEvents();
 
         getBoundedDevice();
 
+        startConnecting();
     }
 
     void getBoundedDevice() {
@@ -76,7 +81,7 @@ public class MainActivity extends Activity {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
-    void initilaizeComponents() {
+    void initializeComponents() {
         btnStartConnecting = (Button) findViewById(R.id.btnStartConnecting);
         btnGetBatteryInfo = (Button) findViewById(R.id.btnGetBatteryInfo);
         btnWalkingInfo = (Button) findViewById(R.id.btnWalkingInfo);
@@ -116,7 +121,15 @@ public class MainActivity extends Activity {
         btnGetHeartRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startScanHeartRate();
+                // 데이터를 30초에 한번씩 받아오도록 만든 것.
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        startScanHeartRate();
+                        System.out.println("hr work!");
+                    }
+                },0,30000);
+//                startScanHeartRate();
             }
         });
     }
@@ -144,7 +157,13 @@ public class MainActivity extends Activity {
     }
 
     void startScanHeartRate() {
-        txtByte.setText("...");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                txtByte.setText("...");
+            }
+        });
+//        txtByte.setText("...");
         BluetoothGattCharacteristic bchar = bluetoothGatt.getService(CustomBluetoothProfile.HeartRate.service)
                 .getCharacteristic(CustomBluetoothProfile.HeartRate.controlCharacteristic);
         bchar.setValue(new byte[]{21, 2, 1});
@@ -217,6 +236,7 @@ public class MainActivity extends Activity {
             Log.v("test", "onCharacteristicRead");
             byte[] data = characteristic.getValue();
             txtByte.setText(Arrays.toString(data));
+            System.out.println("heart: "+ Arrays.toString(data));
         }
 
         @Override

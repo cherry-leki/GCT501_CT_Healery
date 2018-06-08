@@ -20,7 +20,7 @@ android {
     buildToolsVersion "27.0.3"
 
     defaultConfig {
-        applicationId "nodomain.freeyourgadget.gadgetbridge"
+        applicationId "healery.gadgetbridge"
         minSdkVersion 19
         targetSdkVersion 27
 

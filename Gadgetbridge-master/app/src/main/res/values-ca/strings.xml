@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Gadgetbridge</string>
+<resources><string name="app_name">Healery</string>
 
     <string name="title_activity_controlcenter">Gadgetbridge</string>
     <string name="action_settings">Paràmetres</string>

@@ -174,37 +174,21 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/device_action_take_screenshot"
-                android:layout_width="40dp"
+            <TextView
+                android:id="@+id/show_heartRate"
+                android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_below="@id/device_image"
                 android:layout_margin="4dp"
                 android:layout_toEndOf="@id/device_action_fetch_activity_box"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:contentDescription="@string/controlcenter_take_screenshot"
+                android:text="Heart rate: "
+                android:contentDescription="Show stress figure"
                 android:padding="4dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
-                card_view:srcCompat="@drawable/ic_screenshot"
-                android:focusable="true" />
-
-            <ImageView
-                android:id="@+id/device_action_manage_apps"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
-                android:layout_toEndOf="@id/device_action_take_screenshot"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:contentDescription="@string/title_activity_appmanager"
-                android:padding="4dp"
-                android:scaleType="fitXY"
-                android:tint="@color/secondarytext"
-                card_view:srcCompat="@drawable/ic_action_manage_apps"
-                android:focusable="true" />
+                android:focusable="true"/>
 
             <ImageView
                 android:id="@+id/device_action_set_alarms"
@@ -212,7 +196,7 @@
                 android:layout_height="40dp"
                 android:layout_below="@id/device_image"
                 android:layout_margin="4dp"
-                android:layout_toEndOf="@id/device_action_manage_apps"
+                android:layout_toEndOf="@id/show_heartRate"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_start_configure_alarms"
@@ -239,28 +223,12 @@
                 android:focusable="true" />
 
             <ImageView
-                android:id="@+id/device_action_show_activity_tracks"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
-                android:layout_toEndOf="@id/device_action_show_activity_graphs"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:contentDescription="@string/controlcenter_start_activity_tracks"
-                android:padding="4dp"
-                android:scaleType="fitXY"
-                android:tint="@color/secondarytext"
-                card_view:srcCompat="@drawable/ic_activity_tracks"
-                android:focusable="true" />
-
-            <ImageView
                 android:id="@+id/device_action_find"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_below="@id/device_image"
                 android:layout_margin="4dp"
-                android:layout_toEndOf="@id/device_action_show_activity_tracks"
+                android:layout_toEndOf="@id/device_action_show_activity_graphs"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_find_device"
                 android:padding="4dp"
