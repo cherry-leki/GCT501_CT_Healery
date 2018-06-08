@@ -154,6 +154,8 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         if(device.isInitialized() && coordinator.supportsActivityDataFetching()) {
             holder.showHeartRate.setVisibility(View.VISIBLE);
         }
+        System.out.println("changeStressImage!!");
+        holder.showHeartRate.setImageLevel(HealeryActivity.stressCount);
         holder.showHeartRate.setOnClickListener(new View.OnClickListener()
 
                                                 {
@@ -162,7 +164,6 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
                                                         Intent startIntent;
                                                         startIntent = new Intent(context, HealeryActivity.class);
                                                         startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
-                                                        startIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                                         context.startActivity(startIntent);
                                                     }
                                                 }
@@ -341,7 +342,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         ImageView findDevice;
         ImageView removeDevice;
 
-        TextView showHeartRate;
+        ImageView showHeartRate;
 
         ViewHolder(View view) {
             super(view);

@@ -363,9 +363,7 @@
         <activity
             android:name=".activities.HealeryActivity"
             android:label="HealeryActivity"
-            android:launchMode= "singleInstance"
-            android:excludeFromRecents="true"
-            android:taskAffinity=""
+            android:launchMode= "singleTop"
             android:parentActivityName=".activities.ControlCenterv2" />
         <activity
             android:name=".activities.VibrationActivity"
