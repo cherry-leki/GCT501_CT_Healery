@@ -33,7 +33,9 @@ public class HealeryActivity extends AbstractGBActivity{
     private GBDevice device;
     private TextView show_heartRateText, show_walkText, show_stressText;
     private String[] stressDegree = {"좋음", "스트레스 한스푼", "스트레스 가득"};
-    private int stressCount;
+    private static int stressCount;
+
+    static final String STATE_STRESS_COUNT = "stressCount";
 
     // ------
     private static final Logger LOG = LoggerFactory.getLogger(HealeryActivity.class);
@@ -48,10 +50,14 @@ public class HealeryActivity extends AbstractGBActivity{
     private int mHeartRate;
     // ------
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hrandwalk);
+
+        System.out.println("stressCount: "+stressCount);
 
         show_heartRateText = findViewById(R.id.show_heartRateText);
         show_walkText = findViewById(R.id.show_walkText);
@@ -160,7 +166,7 @@ public class HealeryActivity extends AbstractGBActivity{
             show_walkText.setText("Steps: " + steps);
         }
 
-        if(heartRate > 85) {
+        if(heartRate > 70) {
             if(steps < 40) stressCount++;
             if(stressCount > 4) stressCount = 5;
         } else if (heartRate < 69){
@@ -202,8 +208,25 @@ public class HealeryActivity extends AbstractGBActivity{
 
 
     @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        stressCount = savedInstanceState.getInt(STATE_STRESS_COUNT);
+    }
+
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(STATE_STRESS_COUNT, stressCount);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
+        moveTaskToBack(false);
+
     }
 
     @Override

@@ -162,7 +162,6 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
                                                         Intent startIntent;
                                                         startIntent = new Intent(context, HealeryActivity.class);
                                                         startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
-                                                        startIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                                         context.startActivity(startIntent);
                                                     }
                                                 }
