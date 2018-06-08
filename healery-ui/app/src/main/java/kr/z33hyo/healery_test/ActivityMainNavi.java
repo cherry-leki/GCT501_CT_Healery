@@ -126,10 +126,14 @@ public class ActivityMainNavi extends AppCompatActivity
         else if (id==R.id.nav_initialize){
             SharedPreferences setting = getSharedPreferences("setting", 0);
             SharedPreferences actvt = getSharedPreferences("activity", 0);
+            SharedPreferences report = getSharedPreferences("report", 0);
             SharedPreferences.Editor editor = setting.edit();
             editor.clear();
             editor.commit();
             editor = actvt.edit();
+            editor.clear();
+            editor.commit();
+            editor = report.edit();
             editor.clear();
             editor.commit();
             ActivityCompat.finishAffinity(this);

@@ -25,6 +25,7 @@ public class ActivityCompleted1 extends Activity {
         else if (beforeStateStr.equals(getResources().getString(R.string.stress_one_spoon))) beforeState = 1;
         else if (beforeStateStr.equals(getResources().getString(R.string.stress_high))) beforeState=2;
 
+        /*현재 스트레스 상태 여기에!*/
         int nowState = 0;
         TextView txtview_now = (TextView)findViewById(R.id.nowStateTextView);
 
@@ -36,7 +37,8 @@ public class ActivityCompleted1 extends Activity {
         SharedPreferences setting = getSharedPreferences("setting", 0);
         SharedPreferences.Editor editor = setting.edit();
         DetailString dstr = new DetailString(setting);
-        int cat = dstr.getCategoryFromString(actvt.getString("select",""));
+        String actvtName = actvt.getString("select","");
+        int cat = dstr.getCategoryFromString(actvtName);
         String weightname = "weight"+String.valueOf(cat);
         int weightvalue = setting.getInt(weightname,DetailString.defaultWeight);
         if (beforeState < nowState) {
@@ -56,6 +58,15 @@ public class ActivityCompleted1 extends Activity {
         editor.commit();
         editor = actvt.edit();
         editor.clear();
+        editor.commit();
+        SharedPreferences report = getSharedPreferences("report", 0);
+        editor = report.edit();
+        int reportN = report.getInt("N", 0);
+        editor.putString("activity"+String.valueOf(reportN),actvtName);
+        editor.putInt("category"+String.valueOf(reportN),cat);
+        editor.putInt("beforeStressState"+String.valueOf(reportN),beforeState);
+        editor.putInt("nowStressState"+String.valueOf(reportN),nowState);
+        editor.putLong("time"+String.valueOf(reportN),System.currentTimeMillis());
         editor.commit();
         btn_complete.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
