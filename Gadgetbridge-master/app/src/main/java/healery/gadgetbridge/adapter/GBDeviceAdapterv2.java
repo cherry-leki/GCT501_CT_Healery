@@ -156,8 +156,8 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         if(device.isInitialized() && coordinator.supportsActivityDataFetching()) {
             holder.showHeartRate.setVisibility(View.VISIBLE);
         }
-        System.out.println("changeStressImage!!");
-        holder.showHeartRate.setImageLevel(HealeryActivity.stressCount);
+        holder.showHeartRate.setImageLevel(ActivityMainNavi.stressCount);
+        System.out.println("holderImageLevel: " + ActivityMainNavi.stressCount);
         holder.showHeartRate.setOnClickListener(new View.OnClickListener()
 
                                                 {

@@ -13,6 +13,9 @@ import healery.gadgetbridge.R;
 
 public class ActivityCompleted1 extends Activity {
 
+    private String nowStateStr;
+    private int beforeState, nowState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +25,11 @@ public class ActivityCompleted1 extends Activity {
         String beforeStateStr = actvt.getString("beforeStressState","");
         txtview_before.setText(beforeStateStr);
 
-        int beforeState=-1;
-        if (beforeStateStr.equals(getResources().getString(R.string.stress_high))) beforeState=0;
-        else if (beforeStateStr.equals(getResources().getString(R.string.stress_one_spoon))) beforeState = 1;
-        else if (beforeStateStr.equals(getResources().getString(R.string.stress_high))) beforeState=2;
+        beforeState = setStressState(beforeStateStr);
 
         /*현재 스트레스 상태 여기에!*/
-        int nowState = 0;
+        nowState = setStressState(ActivityMainNavi.getCurrentStressState());
+
         TextView txtview_now = (TextView)findViewById(R.id.nowStateTextView);
 
         TextView txtview = (TextView) findViewById(R.id.resultTextView);
@@ -91,9 +92,18 @@ public class ActivityCompleted1 extends Activity {
         });
         btn_no.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                Intent intent = new Intent(ActivityCompleted1.this, ActivityMainNavi.class);
+                startActivity(intent);
                 finish();
                 return;
             }
         });
+    }
+
+    private int setStressState(String compareState) {
+        if (compareState.equals(getResources().getString(R.string.stress_high))) return 0;
+        else if (compareState.equals(getResources().getString(R.string.stress_one_spoon))) return 1;
+        else if (compareState.equals(getResources().getString(R.string.stress_high))) return 2;
+        else return -1;
     }
 }

@@ -48,8 +48,14 @@ public class ActivityMainNavi extends AppCompatActivity
     TextView txtview_state, txtview_go;
     ImageView imgview_state;
 
-    private String[] stressDegree = {"좋음", "스트레스 한스푼", "스트레스 가득"};
     public static int stressCount;
+    public static String stressState;
+
+    private String gender;
+    private int age;
+    private int goodStressLevel;
+    private int warnStressLevel;
+    private int badStressLevel;
 
     static final String STATE_STRESS_COUNT = "stressCount";
 
@@ -90,6 +96,7 @@ public class ActivityMainNavi extends AppCompatActivity
         TextView txtview_header = (TextView) headerView.findViewById(R.id.naviHeaderTextView);
         txtview_header.setText(setting.getString("name","")+getResources().getString(R.string.greeting));
 
+        setStressLevel(setting);
 
         txtview_state = (TextView)findViewById(R.id.stressStateTextView);
         imgview_state = (ImageView)findViewById(R.id.stressStateImage);
@@ -121,20 +128,33 @@ public class ActivityMainNavi extends AppCompatActivity
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, filterLocal);
     }
 
+    private void setStressLevel(SharedPreferences setting) {
+        gender = setting.getBoolean("male",true) ? "male" : "female";
+        age = setting.getInt("age",0);
+
+        int[] getConstLevel = HeartRateConst.getHeartRate(gender, age);
+        goodStressLevel = getConstLevel[0];
+        warnStressLevel= getConstLevel[1];
+        badStressLevel = getConstLevel[2];
+    }
+
     private void setStressText() {
         if (stressCount > 4){ //높은 스트레스
             txtview_state.setText(getResources().getString(R.string.stress_high));
             txtview_go.setText(getResources().getString(R.string.go_recommend_high));
             imgview_state.setImageDrawable(getResources().getDrawable(R.drawable.stress_high));
+            stressState = getResources().getString(R.string.stress_high);
         }
         else if(stressCount >= 2){ //한스푼 스트레스
             txtview_state.setText(getResources().getString(R.string.stress_one_spoon));
             txtview_go.setText(getResources().getString(R.string.go_recommend_one_spoon));
             imgview_state.setImageDrawable(getResources().getDrawable(R.drawable.stress_one_spoon));
+            stressState = getResources().getString(R.string.stress_one_spoon);
         } else { //평온
             txtview_state.setText(getResources().getString(R.string.stress_no));
             txtview_go.setText(getResources().getString(R.string.go_recommend_no));
             imgview_state.setImageDrawable(getResources().getDrawable(R.drawable.stress_no));
+            stressState = getResources().getString(R.string.stress_no);
         }
     }
 
@@ -198,6 +218,7 @@ public class ActivityMainNavi extends AppCompatActivity
             editor.clear();
             editor.commit();
             ActivityCompat.finishAffinity(this);
+            setStressLevel(setting);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -299,10 +320,15 @@ public class ActivityMainNavi extends AppCompatActivity
             System.out.println("Steps: " + steps);
         }
 
-        if(heartRate > 70) {
+        if(heartRate > badStressLevel) {
             if(steps < 40) stressCount++;
             if(stressCount > 4) stressCount = 5;
-        } else if (heartRate < 69){
+        } else if (heartRate > warnStressLevel){
+            if(steps < 40) {
+                if (stressCount < 2) stressCount++;
+                else stressCount = 3;
+            }
+        } else if (heartRate < goodStressLevel){
             stressCount--;
             if(stressCount < 1) stressCount = 0;
         }
@@ -317,9 +343,13 @@ public class ActivityMainNavi extends AppCompatActivity
         mHeartRate = heartRate;
     }
 
-    private int getCurrentHeartRate() {
+    public int getCurrentHeartRate() {
         int result = mHeartRate;
-        mHeartRate = -1;
+        return result;
+    }
+
+    static public String getCurrentStressState() {
+        String result = stressState;
         return result;
     }
 

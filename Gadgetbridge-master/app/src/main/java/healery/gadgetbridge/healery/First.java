@@ -105,7 +105,16 @@ public class First extends AppCompatActivity {
                     editor.putInt("weight"+String.valueOf(i),DetailString.defaultWeight);
                 }
                 editor.commit();
-                if (getIntent().hasExtra("frommain")==false) {
+
+                SharedPreferences isFirstExecute = getSharedPreferences("isFirstExecute", 0);
+                if (!isFirstExecute.getBoolean("isFirstExecute",true)) {
+                    Intent intent = new Intent(First.this, ActivityMainNavi.class);
+                    startActivity(intent);
+                } else if(isFirstExecute.getBoolean("isFirstExecute",true)) {
+                    editor = isFirstExecute.edit();
+                    editor.putBoolean("isFirstExecute", false);
+                    editor.commit();
+
                     Intent intent = new Intent(First.this, ControlCenterv2.class);
                     startActivity(intent);
                 }
