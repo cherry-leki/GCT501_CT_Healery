@@ -1,47 +1,20 @@
 package nodomain.freeyourgadget.gadgetbridge.activities;
 
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattCallback;
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
-import android.bluetooth.BluetoothProfile;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.BarLineChartBase;
-import com.github.mikephil.charting.charts.Chart;
-import com.github.mikephil.charting.components.LimitLine;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.ChartData;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.utils.Utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -49,26 +22,17 @@ import java.util.concurrent.TimeUnit;
 
 import nodomain.freeyourgadget.gadgetbridge.GBApplication;
 import nodomain.freeyourgadget.gadgetbridge.R;
-import nodomain.freeyourgadget.gadgetbridge.activities.charts.AbstractChartFragment;
-import nodomain.freeyourgadget.gadgetbridge.activities.charts.ChartsData;
-import nodomain.freeyourgadget.gadgetbridge.activities.charts.ChartsHost;
-import nodomain.freeyourgadget.gadgetbridge.activities.charts.CustomBarChart;
-import nodomain.freeyourgadget.gadgetbridge.database.DBHandler;
-import nodomain.freeyourgadget.gadgetbridge.devices.DeviceCoordinator;
-import nodomain.freeyourgadget.gadgetbridge.devices.DeviceManager;
 import nodomain.freeyourgadget.gadgetbridge.entities.MiBandActivitySample;
 import nodomain.freeyourgadget.gadgetbridge.impl.GBDevice;
 import nodomain.freeyourgadget.gadgetbridge.model.ActivitySample;
 import nodomain.freeyourgadget.gadgetbridge.model.DeviceService;
 import nodomain.freeyourgadget.gadgetbridge.model.Measurement;
-import nodomain.freeyourgadget.gadgetbridge.service.btle.GattCharacteristic;
-import nodomain.freeyourgadget.gadgetbridge.service.btle.GattService;
-import nodomain.freeyourgadget.gadgetbridge.util.DeviceHelper;
-import nodomain.freeyourgadget.gadgetbridge.util.GB;
 
 public class HealeryActivity extends AbstractGBActivity{
     private GBDevice device;
-    private TextView show_heartRateText, show_walkText;
+    private TextView show_heartRateText, show_walkText, show_stressText;
+    private String[] stressDegree = {"좋음", "스트레스 한스푼", "스트레스 가득"};
+    private int stressCount;
 
     // ------
     private static final Logger LOG = LoggerFactory.getLogger(HealeryActivity.class);
@@ -80,12 +44,8 @@ public class HealeryActivity extends AbstractGBActivity{
     private final Steps mSteps = new Steps();
     private ScheduledExecutorService pulseScheduler;
     private int maxStepsResetCounter;
-    private List<Measurement> heartRateValues;
-    private LineDataSet mHeartRateSet;
     private int mHeartRate;
     // ------
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +54,7 @@ public class HealeryActivity extends AbstractGBActivity{
 
         show_heartRateText = findViewById(R.id.show_heartRateText);
         show_walkText = findViewById(R.id.show_walkText);
+        show_stressText = findViewById(R.id.show_stressText);
 
         GBApplication.deviceService().onHeartRateTest();
 
@@ -189,13 +150,29 @@ public class HealeryActivity extends AbstractGBActivity{
         int timestamp = sample.getTimestamp();
         if (HeartRateUtils.isValidHeartRateValue(heartRate)) {
             setCurrentHeartRate(heartRate);
-            show_heartRateText.setText(show_heartRateText.getText() + "\n" +heartRate + " / " + System.currentTimeMillis());
+            show_heartRateText.setText("Heart Rate: " + heartRate);
         }
 
         int steps = sample.getSteps();
         if (steps != ActivitySample.NOT_MEASURED) {
             addEntries(steps, timestamp);
-            show_walkText.setText(show_walkText.getText() + "\n" + steps + " / " + System.currentTimeMillis());
+            show_walkText.setText("Steps: " + steps);
+        }
+
+        if(heartRate > 85) {
+            if(steps < 40) stressCount++;
+            if(stressCount > 4){
+                stressCount = 5;
+                show_stressText.setText(stressDegree[2]);
+            }
+        } else if(heartRate > 74){
+            show_stressText.setText(stressDegree[1]);
+        } else if (heartRate < 69){
+            stressCount--;
+            if(stressCount < 1) stressCount = 0;
+        }
+        if(stressCount < 2) {
+            show_stressText.setText(stressDegree[0]);
         }
     }
 
