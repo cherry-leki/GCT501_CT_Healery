@@ -49,6 +49,7 @@ public class ActivityMainNavi extends AppCompatActivity
     ImageView imgview_state;
 
     public static int stressCount;
+    public static String stressState;
 
     static final String STATE_STRESS_COUNT = "stressCount";
 
@@ -125,15 +126,18 @@ public class ActivityMainNavi extends AppCompatActivity
             txtview_state.setText(getResources().getString(R.string.stress_high));
             txtview_go.setText(getResources().getString(R.string.go_recommend_high));
             imgview_state.setImageDrawable(getResources().getDrawable(R.drawable.stress_high));
+            stressState = getResources().getString(R.string.stress_high);
         }
         else if(stressCount >= 2){ //한스푼 스트레스
             txtview_state.setText(getResources().getString(R.string.stress_one_spoon));
             txtview_go.setText(getResources().getString(R.string.go_recommend_one_spoon));
             imgview_state.setImageDrawable(getResources().getDrawable(R.drawable.stress_one_spoon));
+            stressState = getResources().getString(R.string.stress_one_spoon);
         } else { //평온
             txtview_state.setText(getResources().getString(R.string.stress_no));
             txtview_go.setText(getResources().getString(R.string.go_recommend_no));
             imgview_state.setImageDrawable(getResources().getDrawable(R.drawable.stress_no));
+            stressState = getResources().getString(R.string.stress_no);
         }
     }
 
@@ -316,9 +320,13 @@ public class ActivityMainNavi extends AppCompatActivity
         mHeartRate = heartRate;
     }
 
-    private int getCurrentHeartRate() {
+    public int getCurrentHeartRate() {
         int result = mHeartRate;
-        mHeartRate = -1;
+        return result;
+    }
+
+    static public String getCurrentStressState() {
+        String result = stressState;
         return result;
     }
 
