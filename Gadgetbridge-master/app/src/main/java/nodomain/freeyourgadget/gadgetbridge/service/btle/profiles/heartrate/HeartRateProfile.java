@@ -54,6 +54,7 @@ public class HeartRateProfile<T extends AbstractBTLEDeviceSupport> extends Abstr
 
     protected void writeToControlPoint(byte[] value, TransactionBuilder builder) {
         builder.write(getCharacteristic(GattCharacteristic.UUID_CHARACTERISTIC_HEART_RATE_CONTROL_POINT), value);
+        System.out.println("heart value: "+value);
     }
 
     public void requestBodySensorLocation(TransactionBuilder builder) {

@@ -46,14 +46,20 @@ import nodomain.freeyourgadget.gadgetbridge.GBApplication;
 import nodomain.freeyourgadget.gadgetbridge.R;
 import nodomain.freeyourgadget.gadgetbridge.activities.ActivitySummariesActivity;
 import nodomain.freeyourgadget.gadgetbridge.activities.ConfigureAlarms;
+import nodomain.freeyourgadget.gadgetbridge.activities.HealeryActivity;
 import nodomain.freeyourgadget.gadgetbridge.activities.VibrationActivity;
 import nodomain.freeyourgadget.gadgetbridge.activities.charts.ChartsActivity;
 import nodomain.freeyourgadget.gadgetbridge.devices.DeviceCoordinator;
 import nodomain.freeyourgadget.gadgetbridge.devices.DeviceManager;
+import nodomain.freeyourgadget.gadgetbridge.entities.AbstractActivitySample;
+import nodomain.freeyourgadget.gadgetbridge.entities.MiBandActivitySample;
+import nodomain.freeyourgadget.gadgetbridge.entities.MiBandActivitySampleDao;
 import nodomain.freeyourgadget.gadgetbridge.impl.GBDevice;
+import nodomain.freeyourgadget.gadgetbridge.model.ActivitySample;
 import nodomain.freeyourgadget.gadgetbridge.model.BatteryState;
 import nodomain.freeyourgadget.gadgetbridge.model.DeviceType;
 import nodomain.freeyourgadget.gadgetbridge.model.RecordedDataTypes;
+import nodomain.freeyourgadget.gadgetbridge.service.devices.miband.MiBandSupport;
 import nodomain.freeyourgadget.gadgetbridge.util.DeviceHelper;
 import nodomain.freeyourgadget.gadgetbridge.util.GB;
 
@@ -138,6 +144,24 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
             }
         }
 
+        holder.showHeartRate.setVisibility(View.GONE);
+        if(device.isInitialized() && coordinator.supportsActivityDataFetching()) {
+            holder.showHeartRate.setVisibility(View.VISIBLE);
+        }
+        holder.showHeartRate.setOnClickListener(new View.OnClickListener()
+
+                                                {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        Intent startIntent;
+                                                        startIntent = new Intent(context, HealeryActivity.class);
+                                                        startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
+                                                        context.startActivity(startIntent);
+                                                    }
+                                                }
+        );
+
+
         //fetch activity data
         holder.fetchActivityDataBox.setVisibility((device.isInitialized() && coordinator.supportsActivityDataFetching()) ? View.VISIBLE : View.GONE);
         holder.fetchActivityData.setOnClickListener(new View.OnClickListener()
@@ -149,38 +173,6 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
                                                             GBApplication.deviceService().onFetchRecordedData(RecordedDataTypes.TYPE_ACTIVITY);
                                                         }
                                                     }
-        );
-
-
-        //take screenshot
-        holder.takeScreenshotView.setVisibility((device.isInitialized() && coordinator.supportsScreenshots()) ? View.VISIBLE : View.GONE);
-        holder.takeScreenshotView.setOnClickListener(new View.OnClickListener()
-
-                                                     {
-                                                         @Override
-                                                         public void onClick(View v) {
-                                                             showTransientSnackbar(R.string.controlcenter_snackbar_requested_screenshot);
-                                                             GBApplication.deviceService().onScreenshotReq();
-                                                         }
-                                                     }
-        );
-
-        //manage apps
-        holder.manageAppsView.setVisibility((device.isInitialized() && coordinator.supportsAppsManagement()) ? View.VISIBLE : View.GONE);
-        holder.manageAppsView.setOnClickListener(new View.OnClickListener()
-
-                                                 {
-                                                     @Override
-                                                     public void onClick(View v) {
-                                                         DeviceCoordinator coordinator = DeviceHelper.getInstance().getCoordinator(device);
-                                                         Class<? extends Activity> appsManagementActivity = coordinator.getAppsManagementActivity();
-                                                         if (appsManagementActivity != null) {
-                                                             Intent startIntent = new Intent(context, appsManagementActivity);
-                                                             startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
-                                                             context.startActivity(startIntent);
-                                                         }
-                                                     }
-                                                 }
         );
 
         //set alarms
@@ -207,20 +199,6 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
                                                          public void onClick(View v) {
                                                              Intent startIntent;
                                                              startIntent = new Intent(context, ChartsActivity.class);
-                                                             startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
-                                                             context.startActivity(startIntent);
-                                                         }
-                                                     }
-        );
-
-        //show activity tracks
-        holder.showActivityTracks.setVisibility(coordinator.supportsActivityTracks() ? View.VISIBLE : View.GONE);
-        holder.showActivityTracks.setOnClickListener(new View.OnClickListener()
-                                                     {
-                                                         @Override
-                                                         public void onClick(View v) {
-                                                             Intent startIntent;
-                                                             startIntent = new Intent(context, ActivitySummariesActivity.class);
                                                              startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
                                                              context.startActivity(startIntent);
                                                          }
@@ -344,11 +322,8 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         LinearLayout fetchActivityDataBox;
         ImageView fetchActivityData;
         ProgressBar busyIndicator;
-        ImageView takeScreenshotView;
-        ImageView manageAppsView;
         ImageView setAlarmsView;
         ImageView showActivityGraphs;
-        ImageView showActivityTracks;
 
         ImageView deviceInfoView;
         //overflow
@@ -356,6 +331,8 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         ListView deviceInfoList;
         ImageView findDevice;
         ImageView removeDevice;
+
+        TextView showHeartRate;
 
         ViewHolder(View view) {
             super(view);
@@ -372,11 +349,8 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
             fetchActivityDataBox = view.findViewById(R.id.device_action_fetch_activity_box);
             fetchActivityData = view.findViewById(R.id.device_action_fetch_activity);
             busyIndicator = view.findViewById(R.id.device_busy_indicator);
-            takeScreenshotView = view.findViewById(R.id.device_action_take_screenshot);
-            manageAppsView = view.findViewById(R.id.device_action_manage_apps);
             setAlarmsView = view.findViewById(R.id.device_action_set_alarms);
             showActivityGraphs = view.findViewById(R.id.device_action_show_activity_graphs);
-            showActivityTracks = view.findViewById(R.id.device_action_show_activity_tracks);
             deviceInfoView = view.findViewById(R.id.device_info_image);
 
             deviceInfoBox = view.findViewById(R.id.device_item_infos_box);
@@ -384,6 +358,8 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
             deviceInfoList = view.findViewById(R.id.device_item_infos);
             findDevice = view.findViewById(R.id.device_action_find);
             removeDevice = view.findViewById(R.id.device_action_remove);
+
+            showHeartRate = view.findViewById(R.id.show_heartRate);
         }
 
     }

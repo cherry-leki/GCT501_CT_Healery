@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_stopScan"
+            android:id="@+id/scan_start_button"
+            android:layout_gravity="center_horizontal"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan_progressbar"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"/>
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/scan_miband2CandidatesList"
+            android:layout_gravity="bottom|top"
+            android:layout_weight="0.83" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Note:"
+            android:id="@+id/scan_note_textView"
+            android:textStyle="bold"
+            android:gravity="center_horizontal|bottom"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/scan_noteExplain"
+            android:id="@+id/scan_noteExplain_textView"
+            android:gravity="bottom"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

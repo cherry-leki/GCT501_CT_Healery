@@ -20,4 +20,11 @@
     <string name="menu_disconnect">Disconnect</string>
     <string name="menu_scan">Scan</string>
     <string name="menu_stop">Stop</string>
+
+    <!-- button name -->
+    <string name="button_startScan">Start Scan</string>
+    <string name="button_stopScan">Stop Scan</string>
+
+    <!-- explanation -->
+    <string name="scan_noteExplain">MI Band 2는 연결되기까지 시간이 걸립니다. 탐색이 불가능한 경우 다시 SCAN 해주세요.</string>
 </resources>

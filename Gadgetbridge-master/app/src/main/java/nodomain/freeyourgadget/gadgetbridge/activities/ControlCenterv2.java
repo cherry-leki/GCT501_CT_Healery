@@ -50,7 +50,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-import de.cketti.library.changelog.ChangeLog;
 import nodomain.freeyourgadget.gadgetbridge.GBApplication;
 import nodomain.freeyourgadget.gadgetbridge.R;
 import nodomain.freeyourgadget.gadgetbridge.adapter.GBDeviceAdapterv2;
@@ -192,11 +191,6 @@ public class ControlCenterv2 extends AppCompatActivity
             checkAndRequestPermissions();
         }
 
-        ChangeLog cl = createChangeLog();
-        if (cl.isFirstRun()) {
-            cl.getLogDialog().show();
-        }
-
         GBApplication.deviceService().start();
 
         if (GB.isBluetoothEnabled() && deviceList.isEmpty() && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -254,28 +248,11 @@ public class ControlCenterv2 extends AppCompatActivity
             case R.id.action_quit:
                 GBApplication.quit();
                 return true;
-            case R.id.donation_link:
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://liberapay.com/Gadgetbridge")); //TODO: centralize if ever used somewhere else
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
-                return true;
-            case R.id.external_changelog:
-                ChangeLog cl = createChangeLog();
-                cl.getFullLogDialog().show();
-                return true;
         }
 
         return true;
     }
 
-    private ChangeLog createChangeLog() {
-        String css = ChangeLog.DEFAULT_CSS;
-        css += "body { "
-                + "color: " + AndroidUtils.getTextColorHex(getBaseContext()) + "; "
-                + "background-color: " + AndroidUtils.getBackgroundColorHex(getBaseContext()) + ";" +
-                "}";
-        return new ChangeLog(this, css);
-}
     private void launchDiscoveryActivity() {
         startActivity(new Intent(this, DiscoveryActivity.class));
     }

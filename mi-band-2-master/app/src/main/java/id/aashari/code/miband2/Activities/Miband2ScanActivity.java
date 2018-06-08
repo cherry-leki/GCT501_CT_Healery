@@ -1,7 +1,6 @@
 package id.aashari.code.miband2.Activities;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -19,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +31,7 @@ import id.aashari.code.miband2.R;
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
-public class DeviceScanActivity extends AppCompatActivity {
+public class Miband2ScanActivity extends AppCompatActivity {
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
@@ -40,15 +40,26 @@ public class DeviceScanActivity extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
-    ListView listView;
+    private ListView scannedMiBand2List;
+    private Button startScanButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_device_scan);
+        setContentView(R.layout.activity_miband2_scan);
 
-        listView = (ListView) findViewById(R.id.listView);
-
+        scannedMiBand2List = (ListView) findViewById(R.id.scan_miband2CandidatesList);
+        startScanButton = (Button) findViewById(R.id.scan_start_button);
+        startScanButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(startScanButton.getText().equals(getString(R.string.button_stopScan))) {
+                    scanLeDevice(false);
+                } else {
+                    scanLeDevice(true);
+                }
+            }
+        });
 
         mHandler = new Handler();
 
@@ -119,13 +130,13 @@ public class DeviceScanActivity extends AppCompatActivity {
 
         // Initializes list view adapter.
         mLeDeviceListAdapter = new LeDeviceListAdapter();
-        listView.setAdapter(mLeDeviceListAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        scannedMiBand2List.setAdapter(mLeDeviceListAdapter);
+        scannedMiBand2List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final BluetoothDevice device = mLeDeviceListAdapter.getDevice(i);
                 if (device == null) return;
-                final Intent intent = new Intent(DeviceScanActivity.this, MainActivity.class);
+                final Intent intent = new Intent(Miband2ScanActivity.this, MainActivity.class);
                 intent.putExtra(MainActivity.EXTRAS_DEVICE_NAME, device.getName());
                 intent.putExtra(MainActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
                 intent.putExtra("device", device);
@@ -154,6 +165,7 @@ public class DeviceScanActivity extends AppCompatActivity {
         super.onPause();
         scanLeDevice(false);
         mLeDeviceListAdapter.clear();
+        startScanButton.setText(R.string.button_startScan);
     }
 
 
@@ -171,9 +183,11 @@ public class DeviceScanActivity extends AppCompatActivity {
             }, SCAN_PERIOD);
 
             mScanning = true;
+            startScanButton.setText(R.string.button_stopScan);
             mBluetoothAdapter.startLeScan(mLeScanCallback);
         } else {
             mScanning = false;
+            startScanButton.setText(R.string.button_startScan);
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
         }
         invalidateOptionsMenu();
@@ -187,12 +201,24 @@ public class DeviceScanActivity extends AppCompatActivity {
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            mInflator = DeviceScanActivity.this.getLayoutInflater();
+            mInflator = Miband2ScanActivity.this.getLayoutInflater();
         }
 
         public void addDevice(BluetoothDevice device) {
             if (!mLeDevices.contains(device)) {
-                mLeDevices.add(device);
+                if(device.getName() == null) return;
+                else if (device.getName().equals("MI Band 2")) {
+                    mLeDevices.add(device);
+//                    final Intent intent = new Intent(Miband2ScanActivity.this, MainActivity.class);
+//                    intent.putExtra(MainActivity.EXTRAS_DEVICE_NAME, device.getName());
+//                    intent.putExtra(MainActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
+//                    intent.putExtra("device", device);
+//                    if (mScanning) {
+//                        mBluetoothAdapter.stopLeScan(mLeScanCallback);
+//                        mScanning = false;
+//                    }
+//                    startActivity(intent);
+                }
             }
         }
 
