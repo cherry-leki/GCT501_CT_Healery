@@ -107,13 +107,12 @@ public class First extends AppCompatActivity {
                 editor.commit();
 
                 SharedPreferences isFirstExecute = getSharedPreferences("isFirstExecute", 0);
-                if (isFirstExecute.getBoolean("isFirstExecute",false)) {
-                    System.out.println("first?: "+isFirstExecute.getBoolean("isFirstExecute", false));
+                if (!isFirstExecute.getBoolean("isFirstExecute",true)) {
                     Intent intent = new Intent(First.this, ActivityMainNavi.class);
                     startActivity(intent);
-                } else if(!isFirstExecute.getBoolean("isFirstExecute",false)) {
+                } else if(isFirstExecute.getBoolean("isFirstExecute",true)) {
                     editor = isFirstExecute.edit();
-                    editor.putBoolean("isFirstExecute", true);
+                    editor.putBoolean("isFirstExecute", false);
                     editor.commit();
 
                     Intent intent = new Intent(First.this, ControlCenterv2.class);

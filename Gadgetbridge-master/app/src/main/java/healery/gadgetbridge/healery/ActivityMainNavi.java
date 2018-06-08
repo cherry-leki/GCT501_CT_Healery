@@ -54,6 +54,7 @@ public class ActivityMainNavi extends AppCompatActivity
     private String gender;
     private int age;
     private int goodStressLevel;
+    private int warnStressLevel;
     private int badStressLevel;
 
     static final String STATE_STRESS_COUNT = "stressCount";
@@ -130,11 +131,11 @@ public class ActivityMainNavi extends AppCompatActivity
     private void setStressLevel(SharedPreferences setting) {
         gender = setting.getBoolean("male",true) ? "male" : "female";
         age = setting.getInt("age",0);
-        goodStressLevel = HeartRateConst.getHeartRate(gender, age)[0];
-        badStressLevel = HeartRateConst.getHeartRate(gender, age)[1];
 
-        System.out.println("gender: "+gender+", age: "+age);
-        System.out.println("good: "+goodStressLevel+", bad: "+badStressLevel);
+        int[] getConstLevel = HeartRateConst.getHeartRate(gender, age);
+        goodStressLevel = getConstLevel[0];
+        warnStressLevel= getConstLevel[1];
+        badStressLevel = getConstLevel[2];
     }
 
     private void setStressText() {
@@ -321,7 +322,12 @@ public class ActivityMainNavi extends AppCompatActivity
 
         if(heartRate > badStressLevel) {
             if(steps < 40) stressCount++;
-            if(stressCount > 2) stressCount = 3;
+            if(stressCount > 4) stressCount = 5;
+        } else if (heartRate > warnStressLevel){
+            if(steps < 40) {
+                if (stressCount < 2) stressCount++;
+                else stressCount = 3;
+            }
         } else if (heartRate < goodStressLevel){
             stressCount--;
             if(stressCount < 1) stressCount = 0;
