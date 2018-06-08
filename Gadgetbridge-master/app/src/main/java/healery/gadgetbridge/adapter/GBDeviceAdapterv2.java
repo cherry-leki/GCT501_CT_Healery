@@ -58,6 +58,8 @@ import healery.gadgetbridge.devices.DeviceManager;
 import healery.gadgetbridge.entities.AbstractActivitySample;
 import healery.gadgetbridge.entities.MiBandActivitySample;
 import healery.gadgetbridge.entities.MiBandActivitySampleDao;
+import healery.gadgetbridge.healery.ActivityMainNavi;
+import healery.gadgetbridge.healery.First;
 import healery.gadgetbridge.impl.GBDevice;
 import healery.gadgetbridge.model.ActivitySample;
 import healery.gadgetbridge.model.BatteryState;
@@ -162,7 +164,8 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
                                                     @Override
                                                     public void onClick(View v) {
                                                         Intent startIntent;
-                                                        startIntent = new Intent(context, HealeryActivity.class);
+                                                        //startIntent = new Intent(context, HealeryActivity.class);
+                                                        startIntent = new Intent(context, ActivityMainNavi.class);
                                                         startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
                                                         context.startActivity(startIntent);
                                                     }

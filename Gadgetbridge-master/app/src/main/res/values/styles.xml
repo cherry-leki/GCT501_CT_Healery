@@ -5,8 +5,8 @@
         <item name="textColorSecondary">@color/secondarytext</item>
         <item name="textColorTertiary">@color/tertiarytext_light</item>
 
-        <item name="colorPrimary">@color/primary_light</item>
-        <item name="colorPrimaryDark">@color/primarydark_light</item>
+        <item name="colorPrimary">@color/colorBackground</item>
+        <item name="colorPrimaryDark">@color/colorBackgroundDark</item>
         <item name="colorAccent">@color/accent</item>
 
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>

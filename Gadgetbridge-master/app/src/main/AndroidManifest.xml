@@ -40,7 +40,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/GadgetbridgeTheme">
+        android:theme="@style/AppTheme.NoTitle">
+        <!--android:theme="@style/GadgetbridgeTheme"-->
         <activity
             android:name=".activities.ControlCenterv2"
             android:label="@string/title_activity_controlcenter"
@@ -402,14 +403,21 @@
         <!-- healery activity -->
         <activity android:name=".healery.First"
             android:windowSoftInputMode="adjustNothing"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoTitle">
             <!-- android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"> -->
         </activity>
-        <activity android:name=".healery.ActivityRecommend" />
+        <activity
+            android:name=".healery.ActivityRecommend"
+            android:theme="@style/AppTheme.NoTitle"/>
 
-        <activity android:name=".healery.ActivityPerform" />
+        <activity
+            android:name=".healery.ActivityPerform"
+            android:theme="@style/AppTheme.NoTitle"/>
 
-        <activity android:name=".healery.ActivityCompleted1" />
+        <activity
+            android:name=".healery.ActivityCompleted1"
+            android:theme="@style/AppTheme.NoTitle"/>
 
         <activity
             android:name=".healery.ActivityMainNavi"
