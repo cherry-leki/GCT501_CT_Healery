@@ -426,7 +426,6 @@ public abstract class AbstractChartFragment extends AbstractGBFragment {
 //        String dateStringTo = "";
 //        ArrayList<String> xLabels = null;
 
-        LOG.info("" + getTitle() + ": number of samples:" + samples.size());
         LineData lineData;
         if (samples.size() > 1) {
             boolean annotate = true;

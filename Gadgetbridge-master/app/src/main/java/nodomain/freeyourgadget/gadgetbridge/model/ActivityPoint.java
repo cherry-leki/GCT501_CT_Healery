@@ -68,28 +68,4 @@ public class ActivityPoint {
     public void setHeartRate(int heartRate) {
         this.heartRate = heartRate;
     }
-
-    public long getSpeed4() {
-        return speed4;
-    }
-
-    public void setSpeed4(long speed4) {
-        this.speed4 = speed4;
-    }
-
-    public long getSpeed5() {
-        return speed5;
-    }
-
-    public void setSpeed5(long speed5) {
-        this.speed5 = speed5;
-    }
-
-    public long getSpeed6() {
-        return speed6;
-    }
-
-    public void setSpeed6(long speed6) {
-        this.speed6 = speed6;
-    }
 }

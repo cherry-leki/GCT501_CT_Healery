@@ -70,7 +70,6 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
 
     private final Context context;
     private List<GBDevice> deviceList;
-    private List<? extends ActivitySample> samples;
     private int expandedDevicePosition = RecyclerView.NO_POSITION;
     private ViewGroup parent;
 
@@ -146,7 +145,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         }
 
         holder.showHeartRate.setVisibility(View.GONE);
-        if(device.isConnected()) {
+        if(device.isInitialized() && coordinator.supportsActivityDataFetching()) {
             holder.showHeartRate.setVisibility(View.VISIBLE);
         }
         holder.showHeartRate.setOnClickListener(new View.OnClickListener()

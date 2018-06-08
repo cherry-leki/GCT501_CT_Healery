@@ -60,6 +60,7 @@ public class MainActivity extends Activity {
 
         getBoundedDevice();
 
+        startConnecting();
     }
 
     void getBoundedDevice() {
@@ -235,6 +236,7 @@ public class MainActivity extends Activity {
             Log.v("test", "onCharacteristicRead");
             byte[] data = characteristic.getValue();
             txtByte.setText(Arrays.toString(data));
+            System.out.println("heart: "+ Arrays.toString(data));
         }
 
         @Override
