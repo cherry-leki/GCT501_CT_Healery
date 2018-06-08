@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.ContentObservable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.WindowManager;
@@ -20,6 +21,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import healery.gadgetbridge.adapter.GBDeviceAdapterv2;
 import healery.gadgetbridge.entities.MiBandActivitySample;
 import healery.gadgetbridge.GBApplication;
 import healery.gadgetbridge.R;
@@ -31,9 +33,9 @@ import healery.gadgetbridge.model.Measurement;
 
 public class HealeryActivity extends AbstractGBActivity{
     private GBDevice device;
-    private TextView show_heartRateText, show_walkText, show_stressText;
+    private TextView show_heartRateText, show_stepText, show_stressText;
     private String[] stressDegree = {"좋음", "스트레스 한스푼", "스트레스 가득"};
-    private static int stressCount;
+    public static int stressCount;
 
     static final String STATE_STRESS_COUNT = "stressCount";
 
@@ -57,13 +59,15 @@ public class HealeryActivity extends AbstractGBActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hrandwalk);
 
-        System.out.println("stressCount: "+stressCount);
-
         show_heartRateText = findViewById(R.id.show_heartRateText);
-        show_walkText = findViewById(R.id.show_walkText);
+        show_stepText = findViewById(R.id.show_stepText);
         show_stressText = findViewById(R.id.show_stressText);
 
         GBApplication.deviceService().onHeartRateTest();
+
+        if(stressCount > 4) show_stressText.setText(stressDegree[2]);
+        else if (stressCount < 2) show_stressText.setText(stressDegree[0]);
+        else show_stressText.setText(stressDegree[1]);
 
         device = getIntent().getParcelableExtra(GBDevice.EXTRA_DEVICE);
 
@@ -163,7 +167,7 @@ public class HealeryActivity extends AbstractGBActivity{
         int steps = sample.getSteps();
         if (steps != ActivitySample.NOT_MEASURED) {
             addEntries(steps, timestamp);
-            show_walkText.setText("Steps: " + steps);
+            show_stepText.setText("Steps: " + steps);
         }
 
         if(heartRate > 70) {
@@ -177,6 +181,9 @@ public class HealeryActivity extends AbstractGBActivity{
         if(stressCount > 4) show_stressText.setText(stressDegree[2]);
         else if (stressCount < 2) show_stressText.setText(stressDegree[0]);
         else show_stressText.setText(stressDegree[1]);
+
+        ControlCenterv2.getAdapter().notifyDataSetChanged();
+        System.out.println("stress: "+stressCount);
     }
 
     private void setCurrentHeartRate(int heartRate) {
@@ -221,12 +228,6 @@ public class HealeryActivity extends AbstractGBActivity{
         outState.putInt(STATE_STRESS_COUNT, stressCount);
 
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(false);
-
     }
 
     @Override

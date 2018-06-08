@@ -68,7 +68,7 @@
         <activity
             android:name=".activities.appmanager.AppManagerActivity"
             android:label="@string/title_activity_appmanager"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:parentActivityName=".activities.ControlCenterv2" />
         <activity
             android:name=".activities.FwAppInstallerActivity"
@@ -363,7 +363,7 @@
         <activity
             android:name=".activities.HealeryActivity"
             android:label="HealeryActivity"
-            android:launchMode= "singleInstance"
+            android:launchMode= "singleTop"
             android:parentActivityName=".activities.ControlCenterv2" />
         <activity
             android:name=".activities.VibrationActivity"

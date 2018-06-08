@@ -174,20 +174,18 @@
 
             </LinearLayout>
 
-            <TextView
+            <ImageView
                 android:id="@+id/show_heartRate"
-                android:layout_width="80dp"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_below="@id/device_image"
                 android:layout_margin="4dp"
                 android:layout_toEndOf="@id/device_action_fetch_activity_box"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:text="Heart rate: "
                 android:contentDescription="Show stress figure"
                 android:padding="4dp"
-                android:scaleType="fitXY"
-                android:tint="@color/secondarytext"
+                card_view:srcCompat="@drawable/level_list_stress"
                 android:focusable="true"/>
 
             <ImageView

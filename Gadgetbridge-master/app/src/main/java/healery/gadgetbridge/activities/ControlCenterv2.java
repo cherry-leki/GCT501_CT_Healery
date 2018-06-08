@@ -71,10 +71,14 @@ public class ControlCenterv2 extends AppCompatActivity
     private DeviceManager deviceManager;
     private ImageView background;
 
-    private GBDeviceAdapterv2 mGBDeviceAdapter;
+    private static GBDeviceAdapterv2 mGBDeviceAdapter;
     private RecyclerView deviceListView;
 
     private boolean isLanguageInvalid = false;
+
+    public static GBDeviceAdapterv2 getAdapter() {
+        return mGBDeviceAdapter;
+    }
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
