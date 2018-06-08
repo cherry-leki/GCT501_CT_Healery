@@ -51,6 +51,11 @@ public class ActivityMainNavi extends AppCompatActivity
     public static int stressCount;
     public static String stressState;
 
+    private String gender;
+    private int age;
+    private int goodStressLevel;
+    private int badStressLevel;
+
     static final String STATE_STRESS_COUNT = "stressCount";
 
     // ------
@@ -90,6 +95,7 @@ public class ActivityMainNavi extends AppCompatActivity
         TextView txtview_header = (TextView) headerView.findViewById(R.id.naviHeaderTextView);
         txtview_header.setText(setting.getString("name","")+getResources().getString(R.string.greeting));
 
+        setStressLevel(setting);
 
         txtview_state = (TextView)findViewById(R.id.stressStateTextView);
         imgview_state = (ImageView)findViewById(R.id.stressStateImage);
@@ -119,6 +125,16 @@ public class ActivityMainNavi extends AppCompatActivity
         filterLocal.addAction(DeviceService.ACTION_HEARTRATE_MEASUREMENT);
         filterLocal.addAction(DeviceService.ACTION_ENABLE_REALTIME_HEARTRATE_MEASUREMENT);
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, filterLocal);
+    }
+
+    private void setStressLevel(SharedPreferences setting) {
+        gender = setting.getBoolean("male",true) ? "male" : "female";
+        age = setting.getInt("age",0);
+        goodStressLevel = HeartRateConst.getHeartRate(gender, age)[0];
+        badStressLevel = HeartRateConst.getHeartRate(gender, age)[1];
+
+        System.out.println("gender: "+gender+", age: "+age);
+        System.out.println("good: "+goodStressLevel+", bad: "+badStressLevel);
     }
 
     private void setStressText() {
@@ -201,6 +217,7 @@ public class ActivityMainNavi extends AppCompatActivity
             editor.clear();
             editor.commit();
             ActivityCompat.finishAffinity(this);
+            setStressLevel(setting);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -302,10 +319,10 @@ public class ActivityMainNavi extends AppCompatActivity
             System.out.println("Steps: " + steps);
         }
 
-        if(heartRate > 65) {
+        if(heartRate > badStressLevel) {
             if(steps < 40) stressCount++;
-            if(stressCount > 4) stressCount = 5;
-        } else if (heartRate < 69){
+            if(stressCount > 2) stressCount = 3;
+        } else if (heartRate < goodStressLevel){
             stressCount--;
             if(stressCount < 1) stressCount = 0;
         }

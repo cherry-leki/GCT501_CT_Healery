@@ -424,8 +424,7 @@
             android:name=".healery.ActivityMainNavi"
             android:label="@string/title_activity_main_navi"
             android:theme="@style/AppTheme.NoTitle"
-            android:launchMode="singleInstance"
-            android:parentActivityName=".activities.ControlCenterv2"/>
+            android:launchMode="singleInstance"/>
     </application>
 
 </manifest>
