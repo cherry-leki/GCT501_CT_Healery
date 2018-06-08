@@ -28,8 +28,8 @@ public class ActivityPerform extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(ActivityPerform.this, ActivityCompleted1.class);
-                startActivity(intent);
                 intent.putExtra("complete", true);
+                startActivity(intent);
                 finish();
                 return;
             }
@@ -38,8 +38,8 @@ public class ActivityPerform extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(ActivityPerform.this, ActivityCompleted1.class);
-                startActivity(intent);
                 intent.putExtra("complete", false);
+                startActivity(intent);
                 finish();
                 return;
             }
