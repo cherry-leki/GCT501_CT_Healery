@@ -48,7 +48,6 @@ public class ActivityMainNavi extends AppCompatActivity
     TextView txtview_state, txtview_go;
     ImageView imgview_state;
 
-    private String[] stressDegree = {"좋음", "스트레스 한스푼", "스트레스 가득"};
     public static int stressCount;
 
     static final String STATE_STRESS_COUNT = "stressCount";
@@ -299,7 +298,7 @@ public class ActivityMainNavi extends AppCompatActivity
             System.out.println("Steps: " + steps);
         }
 
-        if(heartRate > 70) {
+        if(heartRate > 65) {
             if(steps < 40) stressCount++;
             if(stressCount > 4) stressCount = 5;
         } else if (heartRate < 69){
