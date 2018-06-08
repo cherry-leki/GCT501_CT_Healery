@@ -29,7 +29,7 @@ public class ActivityPerform extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent = new Intent(ActivityPerform.this, ActivityCompleted1.class);
                 startActivity(intent);
-                intent.putExtra("completed", true);
+                intent.putExtra("complete", true);
                 finish();
                 return;
             }
@@ -39,7 +39,7 @@ public class ActivityPerform extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent = new Intent(ActivityPerform.this, ActivityCompleted1.class);
                 startActivity(intent);
-                intent.putExtra("completed", false);
+                intent.putExtra("complete", false);
                 finish();
                 return;
             }
