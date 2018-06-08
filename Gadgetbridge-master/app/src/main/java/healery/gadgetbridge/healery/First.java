@@ -38,7 +38,7 @@ public class First extends AppCompatActivity {
         Intent intent = getIntent();
         if (setting.contains("setting1") && intent.hasExtra("frommain")==false){
             SharedPreferences actvt = getSharedPreferences("activity", 0);
-            intent = new Intent(First.this, ActivityMainNavi.class);
+            intent = new Intent(First.this, ControlCenterv2.class);
             startActivity(intent);
             if(actvt.contains("select")){
                 intent = new Intent(First.this, ActivityPerform.class);

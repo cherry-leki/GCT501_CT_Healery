@@ -165,7 +165,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
                                                     public void onClick(View v) {
                                                         Intent startIntent;
                                                         //startIntent = new Intent(context, HealeryActivity.class);
-                                                        startIntent = new Intent(context, First.class);
+                                                        startIntent = new Intent(context, ActivityMainNavi.class);
                                                         startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
                                                         context.startActivity(startIntent);
                                                     }
