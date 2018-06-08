@@ -47,10 +47,10 @@ public class ActivityPerform extends AppCompatActivity {
     }
     @Override
     public void onBackPressed(){
-        SharedPreferences actvt = getSharedPreferences("activity", 0);
+        /*SharedPreferences actvt = getSharedPreferences("activity", 0);
         SharedPreferences.Editor editor = actvt.edit();
         editor.clear();
         editor.commit();
-        super.onBackPressed();
+        super.onBackPressed();*/
     }
 }
