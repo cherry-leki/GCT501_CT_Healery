@@ -67,6 +67,7 @@ import healery.gadgetbridge.service.devices.miband.MiBandSupport;
 import healery.gadgetbridge.util.DeviceHelper;
 import healery.gadgetbridge.util.GB;
 
+
 /**
  * Adapter for displaying GBDevice instances.
  */
@@ -148,6 +149,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
             }
         }
 
+        //heartrate
         holder.showHeartRate.setVisibility(View.GONE);
         if(device.isInitialized() && coordinator.supportsActivityDataFetching()) {
             holder.showHeartRate.setVisibility(View.VISIBLE);
@@ -160,6 +162,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
                                                         Intent startIntent;
                                                         startIntent = new Intent(context, HealeryActivity.class);
                                                         startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
+                                                        startIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                                         context.startActivity(startIntent);
                                                     }
                                                 }
@@ -305,6 +308,8 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         });
 
     }
+
+
 
     @Override
     public int getItemCount() {

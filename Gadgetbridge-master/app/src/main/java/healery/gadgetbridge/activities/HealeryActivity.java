@@ -162,19 +162,15 @@ public class HealeryActivity extends AbstractGBActivity{
 
         if(heartRate > 85) {
             if(steps < 40) stressCount++;
-            if(stressCount > 4){
-                stressCount = 5;
-                show_stressText.setText(stressDegree[2]);
-            }
-        } else if(heartRate > 74){
-            show_stressText.setText(stressDegree[1]);
+            if(stressCount > 4) stressCount = 5;
         } else if (heartRate < 69){
             stressCount--;
             if(stressCount < 1) stressCount = 0;
         }
-        if(stressCount < 2) {
-            show_stressText.setText(stressDegree[0]);
-        }
+
+        if(stressCount > 4) show_stressText.setText(stressDegree[2]);
+        else if (stressCount < 2) show_stressText.setText(stressDegree[0]);
+        else show_stressText.setText(stressDegree[1]);
     }
 
     private void setCurrentHeartRate(int heartRate) {
@@ -198,10 +194,16 @@ public class HealeryActivity extends AbstractGBActivity{
 
     }
 
+//    @Override
+//    public void onPause() {
+//        enableRealtimeTracking(true);
+//        super.onPause();
+//    }
+
+
     @Override
-    public void onPause() {
-        enableRealtimeTracking(true);
-        super.onPause();
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     @Override
