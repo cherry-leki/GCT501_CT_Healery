@@ -54,4 +54,28 @@
     <style name="GadgetbridgeTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="GadgetbridgeTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!-- healery styles -->
+    <!-- Base application theme. -->
+    <style parent="Theme.AppCompat.Light.DarkActionBar" name="AppTheme">
+    <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoTitle">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="NavDrawerTextStyle">
+        <item name="android:textSize">@dimen/normal_font_size</item>
+    </style>
+
+    <style parent="ThemeOverlay.AppCompat.Dark.ActionBar" name="AppTheme.NoTitle.AppBarOverlay"/>
+
+    <style parent="ThemeOverlay.AppCompat.Light" name="AppTheme.NoTitle.PopupOverlay"/>
+
 </resources>

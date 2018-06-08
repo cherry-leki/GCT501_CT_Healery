@@ -398,6 +398,23 @@
             android:name=".service.devices.miband2.HR_Walk"
             android:enabled="true"
             android:exported="true"></service>
+
+        <!-- healery activity -->
+        <activity android:name=".healery.First"
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait">
+            <!-- android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"> -->
+        </activity>
+        <activity android:name=".healery.ActivityRecommend" />
+
+        <activity android:name=".healery.ActivityPerform" />
+
+        <activity android:name=".healery.ActivityCompleted1" />
+
+        <activity
+            android:name=".healery.ActivityMainNavi"
+            android:label="@string/title_activity_main_navi"
+            android:theme="@style/AppTheme.NoTitle" />
     </application>
 
 </manifest>

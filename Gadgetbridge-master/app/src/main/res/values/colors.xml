@@ -31,4 +31,13 @@
     <color name="chart_not_worn_light" type="color">#545254</color>
     <color name="chart_not_worn_dark" type="color">#d8d9d8</color>
 
+
+    <!-- Healery color -->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#777777</color>
+    <color name="colorBackground">#FFCA18</color>
+    <color name="colorButton">#3F48CC</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGray">#222222</color>
 </resources>
