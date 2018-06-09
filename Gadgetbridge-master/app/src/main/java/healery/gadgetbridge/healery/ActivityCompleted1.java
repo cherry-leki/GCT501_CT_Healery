@@ -97,6 +97,7 @@ public class ActivityCompleted1 extends Activity {
         });
         btn_no.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                ActivityMainNavi.isMissionGoing = false;
                 Intent intent = new Intent(ActivityCompleted1.this, ActivityMainNavi.class);
                 startActivity(intent);
                 finish();

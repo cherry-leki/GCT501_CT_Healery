@@ -1,5 +1,7 @@
 package healery.gadgetbridge.healery;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +9,8 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.RemoteInput;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +41,11 @@ import healery.gadgetbridge.activities.HeartRateUtils;
 import healery.gadgetbridge.entities.MiBandActivitySample;
 import healery.gadgetbridge.model.ActivitySample;
 import healery.gadgetbridge.model.DeviceService;
+import healery.gadgetbridge.model.NotificationSpec;
+import healery.gadgetbridge.model.NotificationType;
+import healery.gadgetbridge.util.GB;
+
+import static healery.gadgetbridge.util.GB.NOTIFICATION_CHANNEL_ID;
 
 public class ActivityMainNavi extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -65,6 +75,12 @@ public class ActivityMainNavi extends AppCompatActivity
     private ScheduledExecutorService pulseScheduler;
     private int maxStepsResetCounter;
     private int mHeartRate;
+
+    private static final String EXTRA_REPLY = "reply";
+    private static final String ACTION_REPLY
+            = "healery.gadgetbridge.DebugActivity.action.reply";
+    public static boolean isMissionGoing = false;
+    private NotificationSpec notificationSpec;
     // ------
 
     @Override
@@ -108,19 +124,23 @@ public class ActivityMainNavi extends AppCompatActivity
                 SharedPreferences.Editor editor = actvt.edit();
                 editor.putString("beforeStressState", ((TextView)findViewById(R.id.stressStateTextView)).getText().toString());
                 editor.commit();
+                isMissionGoing = true;
                 startActivity(intent);
             }
         });
 
 
         // 내부분
-        GBApplication.deviceService().onHeartRateTest();
 
         IntentFilter filterLocal = new IntentFilter();
         filterLocal.addAction(DeviceService.ACTION_REALTIME_SAMPLES);
-        filterLocal.addAction(DeviceService.ACTION_HEARTRATE_MEASUREMENT);
         filterLocal.addAction(DeviceService.ACTION_ENABLE_REALTIME_HEARTRATE_MEASUREMENT);
+        filterLocal.addAction(ACTION_REPLY);
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, filterLocal);
+
+        notificationSpec = new NotificationSpec();
+        notificationSpec.type = NotificationType.SIGNAL;
+        notificationSpec.sender = "Stress";
     }
 
     private void setStressLevel(SharedPreferences setting) {
@@ -297,6 +317,13 @@ public class ActivityMainNavi extends AppCompatActivity
                     addSample(sample);
                     break;
                 }
+                case ACTION_REPLY: {
+                    Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
+                    CharSequence reply = remoteInput.getCharSequence(EXTRA_REPLY);
+                    LOG.info("got wearable reply: " + reply);
+                    GB.toast(context, "got wearable reply: " + reply, Toast.LENGTH_SHORT, GB.INFO);
+                    break;
+                }
             }
         }
     };
@@ -318,6 +345,7 @@ public class ActivityMainNavi extends AppCompatActivity
         if(heartRate > badStressLevel) {
             if(steps < 40) stressCount++;
             if(stressCount > 4) stressCount = 5;
+
         } else if (heartRate > warnStressLevel){
             if(steps < 40) {
                 if (stressCount < 2) stressCount++;
@@ -326,6 +354,10 @@ public class ActivityMainNavi extends AppCompatActivity
         } else if (heartRate < goodStressLevel){
             stressCount--;
             if(stressCount < 1) stressCount = 0;
+        }
+
+        if (stressCount > 3 && !isMissionGoing) {
+            sendNotification();
         }
 
         setStressText();
@@ -372,7 +404,6 @@ public class ActivityMainNavi extends AppCompatActivity
 
         stressCount = savedInstanceState.getInt(STATE_STRESS_COUNT);
     }
-
 
 
     @Override
@@ -442,5 +473,40 @@ public class ActivityMainNavi extends AppCompatActivity
         }
     }
 
+    private void sendNotification() {
+        Intent notificationIntent = new Intent(getApplicationContext(), ActivityMainNavi.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0,
+                notificationIntent, 0);
+
+        NotificationManager nManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        RemoteInput remoteInput = new RemoteInput.Builder(EXTRA_REPLY).build();
+
+        Intent replyIntent = new Intent(ACTION_REPLY);
+
+        PendingIntent replyPendingIntent = PendingIntent.getBroadcast(this, 0, replyIntent, 0);
+
+        NotificationCompat.Action action =
+                new NotificationCompat.Action.Builder(android.R.drawable.ic_input_add, "Reply", replyPendingIntent)
+                        .addRemoteInput(remoteInput)
+                        .build();
+
+        NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender().addAction(action);
+
+        NotificationCompat.Builder ncomp = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setContentTitle("긴급! 스트레스 상황!!")
+                .setContentText("스트레스 상태에 도달했어요! Healery에게 활동을 추천받아보세요!")
+                .setTicker("스트레스 상태에 도달했어요! Healery에게 활동을 추천받아보세요!")
+                .setSmallIcon(R.drawable.stress_high_small)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .extend(wearableExtender);
+
+        if (nManager != null) {
+            nManager.notify((int) System.currentTimeMillis(), ncomp.build());
+        }
+    }
     //------
 }

@@ -1176,7 +1176,7 @@ public class MiBand2Support extends AbstractBTLEDeviceSupport {
 
     private RealtimeSamplesSupport getRealtimeSamplesSupport() {
         if (realtimeSamplesSupport == null) {
-            realtimeSamplesSupport = new RealtimeSamplesSupport(1000, 20000) {
+            realtimeSamplesSupport = new RealtimeSamplesSupport(1000, 30000) {
                 @Override
                 public void doCurrentSample() {
 
