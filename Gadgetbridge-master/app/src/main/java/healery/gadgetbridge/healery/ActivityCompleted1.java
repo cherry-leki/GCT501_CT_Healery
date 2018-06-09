@@ -73,6 +73,7 @@ public class ActivityCompleted1 extends Activity {
         editor.putInt("beforeStressState"+String.valueOf(reportN),beforeState);
         editor.putInt("nowStressState"+String.valueOf(reportN),nowState);
         editor.putLong("time"+String.valueOf(reportN),System.currentTimeMillis());
+        editor.putBoolean("complete"+String.valueOf(reportN), getIntent().getBooleanExtra("complete", false));
         editor.commit();
         btn_complete.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
