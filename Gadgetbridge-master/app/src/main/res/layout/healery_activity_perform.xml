@@ -47,8 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:maxHeight="300dp"
-                android:paddingHorizontal="10dp"
+                android:paddingHorizontal="@dimen/margin_1"
+                android:paddingBottom="@dimen/margin_1"
                 android:src="@drawable/activity_0_0"
                 app:layout_constraintBottom_toTopOf="@id/textView6"
                 app:layout_constraintTop_toBottomOf="@id/selectedTextView" />
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingTop="@dimen/margin_4"
+                android:paddingTop="@dimen/margin_1"
                 android:text="@string/perform_please"
                 android:textSize="@dimen/big_font_size"
                 app:layout_constraintTop_toBottomOf="@+id/assistImageView" />
