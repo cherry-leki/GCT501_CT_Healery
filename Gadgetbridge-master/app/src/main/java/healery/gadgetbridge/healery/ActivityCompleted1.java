@@ -56,10 +56,11 @@ public class ActivityCompleted1 extends Activity {
         }
         else {
             txtview.setText(getResources().getString(R.string.completed_bad));
+            if(beforeState==0 && nowState==0) txtview.setText("지금 좋은 상태에요. 다른 활동도 해보시겠어요?");
             btn_yes.setVisibility(View.VISIBLE);
             btn_no.setVisibility(View.VISIBLE);
             btn_complete.setVisibility(View.INVISIBLE);
-            if (weightvalue>1 && getIntent().getBooleanExtra("complete",false)) editor.putInt(weightname,weightvalue-1);
+            if (weightvalue>1 && getIntent().getBooleanExtra("complete",false) && beforeState!=0) editor.putInt(weightname,weightvalue-1);
         }
         editor.commit();
         editor = actvt.edit();
