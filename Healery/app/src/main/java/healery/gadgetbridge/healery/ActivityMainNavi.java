@@ -38,6 +38,7 @@ import healery.gadgetbridge.R;
 import healery.gadgetbridge.activities.ControlCenterv2;
 import healery.gadgetbridge.activities.HealeryActivity;
 import healery.gadgetbridge.activities.HeartRateUtils;
+import healery.gadgetbridge.devices.miband.MiBand2Service;
 import healery.gadgetbridge.entities.MiBandActivitySample;
 import healery.gadgetbridge.model.ActivitySample;
 import healery.gadgetbridge.model.DeviceService;
@@ -80,7 +81,6 @@ public class ActivityMainNavi extends AppCompatActivity
     private static final String ACTION_REPLY
             = "healery.gadgetbridge.DebugActivity.action.reply";
     public static boolean isMissionGoing = false;
-    private NotificationSpec notificationSpec;
     // ------
 
     @Override
@@ -131,16 +131,11 @@ public class ActivityMainNavi extends AppCompatActivity
 
 
         // 내부분
-
         IntentFilter filterLocal = new IntentFilter();
         filterLocal.addAction(DeviceService.ACTION_REALTIME_SAMPLES);
         filterLocal.addAction(DeviceService.ACTION_ENABLE_REALTIME_HEARTRATE_MEASUREMENT);
         filterLocal.addAction(ACTION_REPLY);
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, filterLocal);
-
-        notificationSpec = new NotificationSpec();
-        notificationSpec.type = NotificationType.SIGNAL;
-        notificationSpec.sender = "Stress";
     }
 
     private void setStressLevel(SharedPreferences setting) {
@@ -317,13 +312,6 @@ public class ActivityMainNavi extends AppCompatActivity
                     addSample(sample);
                     break;
                 }
-                case ACTION_REPLY: {
-                    Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
-                    CharSequence reply = remoteInput.getCharSequence(EXTRA_REPLY);
-                    LOG.info("got wearable reply: " + reply);
-                    GB.toast(context, "got wearable reply: " + reply, Toast.LENGTH_SHORT, GB.INFO);
-                    break;
-                }
             }
         }
     };
@@ -451,6 +439,7 @@ public class ActivityMainNavi extends AppCompatActivity
         return 1000;
     }
 
+
     private void enableRealtimeTracking(boolean enable) {
         if (enable && pulseScheduler != null) {
             // already running
@@ -505,7 +494,7 @@ public class ActivityMainNavi extends AppCompatActivity
                 .extend(wearableExtender);
 
         if (nManager != null) {
-            nManager.notify((int) System.currentTimeMillis(), ncomp.build());
+            nManager.notify(0, ncomp.build());
         }
     }
     //------
