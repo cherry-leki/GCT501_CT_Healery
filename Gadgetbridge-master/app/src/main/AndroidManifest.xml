@@ -424,7 +424,9 @@
             android:name=".healery.ActivityMainNavi"
             android:label="@string/title_activity_main_navi"
             android:theme="@style/AppTheme.NoTitle"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""/>
     </application>
 
 </manifest>
