@@ -107,7 +107,7 @@
         android:id="@+id/goRecommendTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:gravity="center"
         android:text="@string/go_recommend_one_spoon"
         app:layout_constraintBottom_toTopOf="@id/recommendButton"
         android:textSize="@dimen/normal_font_size"

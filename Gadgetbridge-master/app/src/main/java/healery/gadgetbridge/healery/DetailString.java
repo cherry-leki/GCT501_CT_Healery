@@ -2,9 +2,11 @@ package healery.gadgetbridge.healery;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import java.util.Random;
+import healery.gadgetbridge.R;
 
 public class DetailString extends Application {
     static int n = 13;
@@ -17,6 +19,21 @@ public class DetailString extends Application {
     private int weight[] = new int[n];
     private int defaultRandomN = 3;
     private String pref; //pref는 category랑 동일
+    static int detailActivityDrawableId[][] = new int[][] {
+            {R.drawable.activity_0_0, R.drawable.activity_0_1, R.drawable.activity_0_2},
+            {R.drawable.activity_1_0, R.drawable.activity_1_1, R.drawable.activity_1_2, R.drawable.activity_1_3},
+            {R.drawable.activity_2_0, R.drawable.activity_2_1, R.drawable.activity_2_2},
+            {R.drawable.activity_3_0, R.drawable.activity_3_1, R.drawable.activity_3_2, R.drawable.activity_3_3},
+            {R.drawable.activity_4_0, R.drawable.activity_4_1, R.drawable.activity_4_2},
+            {R.drawable.activity_5_0, R.drawable.activity_5_1, R.drawable.activity_5_2},
+            {R.drawable.activity_6_0, R.drawable.activity_6_1, R.drawable.activity_6_2},
+            {R.drawable.activity_7_0, R.drawable.activity_7_1, R.drawable.activity_7_2},
+            {R.drawable.activity_8_0, R.drawable.activity_8_1, R.drawable.activity_8_2},
+            {R.drawable.activity_9_0, R.drawable.activity_9_1, R.drawable.activity_9_2},
+            {R.drawable.activity_10_0, R.drawable.activity_10_1, R.drawable.activity_10_2},
+            {R.drawable.activity_11_0, R.drawable.activity_11_1, R.drawable.activity_11_2},
+            {R.drawable.activity_12_0, R.drawable.activity_12_1, R.drawable.activity_12_2},
+    };
     public DetailString(SharedPreferences setting){
         detailActivityList[0] = new String[] {//영상 시청
                 "유튜브 인기 영상 “비긴어게인2 박정현_Someone like you”를 시청해보세요.",
@@ -165,6 +182,14 @@ public class DetailString extends Application {
         for(int i=0;i<n;i++){
             for(String s:detailActivityList[i]){
                 if (s.equals(str)) return i;
+            }
+        }
+        return -1;
+    }
+    public int getDrawableIdFromString(String str){
+        for (int i=0;i<n;i++){
+            for (int j=0;j<detailActivityList[i].length;j++){
+                if (detailActivityList[i][j].equals(str)) return detailActivityDrawableId[i][j];
             }
         }
         return -1;

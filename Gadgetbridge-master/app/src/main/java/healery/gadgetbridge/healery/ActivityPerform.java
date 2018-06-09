@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -26,6 +27,9 @@ public class ActivityPerform extends AppCompatActivity {
         textView.setText(actvt.getString("select",""));
         Button btn_complete = (Button) findViewById(R.id.performCompleteButton);
         Button btn_stop = (Button) findViewById(R.id.performStopButton);
+        ImageView assistImageView = (ImageView) findViewById(R.id.assistImageView);
+        DetailString tmp = new DetailString(getSharedPreferences("setting", 0));
+        assistImageView.setImageDrawable(getResources().getDrawable(tmp.getDrawableIdFromString(actvt.getString("select",""))));
         btn_complete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
