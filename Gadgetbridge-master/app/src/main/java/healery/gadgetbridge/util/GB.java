@@ -88,7 +88,7 @@ public class GB {
         builder.setContentTitle(deviceName)
                 .setTicker(deviceName + " - " + text)
                 .setContentText(text)
-                .setSmallIcon(connected ? R.drawable.ic_notification : R.drawable.ic_notification_disconnected)
+                .setSmallIcon(connected ? R.drawable.healery_icon : R.drawable.healery_icon_disconnect)
                 .setContentIntent(getContentIntent(context))
                 .setColor(context.getResources().getColor(R.color.accent))
                 .setOngoing(true);
@@ -97,7 +97,7 @@ public class GB {
         if (connected) {
             deviceCommunicationServiceIntent.setAction(DeviceService.ACTION_DISCONNECT);
             PendingIntent disconnectPendingIntent = PendingIntent.getService(context, 0, deviceCommunicationServiceIntent, PendingIntent.FLAG_ONE_SHOT);
-            builder.addAction(R.drawable.ic_notification_disconnected, context.getString(R.string.controlcenter_disconnect), disconnectPendingIntent);
+            builder.addAction(R.drawable.healery_icon_disconnect, context.getString(R.string.controlcenter_disconnect), disconnectPendingIntent);
             if (GBApplication.isRunningLollipopOrLater() && DeviceHelper.getInstance().getCoordinator(device).supportsActivityDataFetching()) { //for some reason this fails on KK
                 deviceCommunicationServiceIntent.setAction(DeviceService.ACTION_FETCH_RECORDED_DATA);
                 PendingIntent fetchPendingIntent = PendingIntent.getService(context, 1, deviceCommunicationServiceIntent, PendingIntent.FLAG_ONE_SHOT);
@@ -107,7 +107,7 @@ public class GB {
             deviceCommunicationServiceIntent.setAction(DeviceService.ACTION_CONNECT);
             deviceCommunicationServiceIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
             PendingIntent reconnectPendingIntent = PendingIntent.getService(context, 2, deviceCommunicationServiceIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            builder.addAction(R.drawable.ic_notification, context.getString(R.string.controlcenter_connect), reconnectPendingIntent);
+            builder.addAction(R.drawable.healery_icon, context.getString(R.string.controlcenter_connect), reconnectPendingIntent);
         }
         if (GBApplication.isRunningLollipopOrLater()) {
             builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
@@ -122,7 +122,7 @@ public class GB {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
         builder.setTicker(text)
                 .setContentText(text)
-                .setSmallIcon(R.drawable.ic_notification_disconnected)
+                .setSmallIcon(R.drawable.healery_icon_disconnect)
                 .setContentIntent(getContentIntent(context))
                 .setColor(context.getResources().getColor(R.color.accent))
                 .setOngoing(true);
@@ -130,7 +130,7 @@ public class GB {
             Intent deviceCommunicationServiceIntent = new Intent(context, DeviceCommunicationService.class);
             deviceCommunicationServiceIntent.setAction(DeviceService.ACTION_CONNECT);
             PendingIntent reconnectPendingIntent = PendingIntent.getService(context, 2, deviceCommunicationServiceIntent, PendingIntent.FLAG_ONE_SHOT);
-            builder.addAction(R.drawable.ic_notification, context.getString(R.string.controlcenter_connect), reconnectPendingIntent);
+            builder.addAction(R.drawable.healery_icon, context.getString(R.string.controlcenter_connect), reconnectPendingIntent);
         }
         if (GBApplication.isRunningLollipopOrLater()) {
             builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
@@ -394,7 +394,7 @@ public class GB {
                 .setContentTitle(context.getString(R.string.notif_export_failed_title))
                 .setContentText(text)
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.healery_icon)
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setOngoing(false);
 

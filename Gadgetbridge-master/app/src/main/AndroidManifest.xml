@@ -37,9 +37,8 @@
         android:name=".GBApplication"
         android:allowBackup="false"
         android:fullBackupContent="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/healery_applogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme.NoTitle">
         <!--android:theme="@style/GadgetbridgeTheme"-->
         <activity
