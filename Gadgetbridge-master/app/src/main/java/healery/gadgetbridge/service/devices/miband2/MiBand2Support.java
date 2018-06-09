@@ -1176,7 +1176,7 @@ public class MiBand2Support extends AbstractBTLEDeviceSupport {
 
     private RealtimeSamplesSupport getRealtimeSamplesSupport() {
         if (realtimeSamplesSupport == null) {
-            realtimeSamplesSupport = new RealtimeSamplesSupport(1000, 10000) {
+            realtimeSamplesSupport = new RealtimeSamplesSupport(1000, 20000) {
                 @Override
                 public void doCurrentSample() {
 
@@ -1188,10 +1188,8 @@ public class MiBand2Support extends AbstractBTLEDeviceSupport {
                         int ts = (int) (System.currentTimeMillis() / 1000);
                         MiBand2SampleProvider provider = new MiBand2SampleProvider(gbDevice, session);
                         MiBandActivitySample sample = createActivitySample(device, user, ts, provider);
-                        System.out.println("Heart rate: "+ getHeartrateBpm());
                         sample.setHeartRate(getHeartrateBpm());
                         sample.setSteps(getSteps());
-                        System.out.println("steps: " + getSteps());
                         sample.setRawIntensity(ActivitySample.NOT_MEASURED);
                         sample.setRawKind(MiBand2Const.TYPE_ACTIVITY); // to make it visible in the charts TODO: add a MANUAL kind for that?
 

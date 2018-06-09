@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +15,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -38,7 +34,6 @@ import healery.gadgetbridge.activities.ControlCenterv2;
 import healery.gadgetbridge.activities.HealeryActivity;
 import healery.gadgetbridge.activities.HeartRateUtils;
 import healery.gadgetbridge.entities.MiBandActivitySample;
-import healery.gadgetbridge.impl.GBDevice;
 import healery.gadgetbridge.model.ActivitySample;
 import healery.gadgetbridge.model.DeviceService;
 
@@ -139,7 +134,7 @@ public class ActivityMainNavi extends AppCompatActivity
     }
 
     private void setStressText() {
-        if (stressCount > 4){ //높은 스트레스
+        if (stressCount >= 4){ //높은 스트레스
             txtview_state.setText(getResources().getString(R.string.stress_high));
             txtview_go.setText(getResources().getString(R.string.go_recommend_high));
             imgview_state.setImageDrawable(getResources().getDrawable(R.drawable.stress_high));
@@ -364,11 +359,11 @@ public class ActivityMainNavi extends AppCompatActivity
 
     }
 
-//    @Override
-//    public void onPause() {
-//        enableRealtimeTracking(true);
-//        super.onPause();
-//    }
+    @Override
+    public void onPause() {
+        enableRealtimeTracking(true);
+        super.onPause();
+    }
 
 
     @Override

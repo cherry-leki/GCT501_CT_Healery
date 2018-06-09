@@ -23,12 +23,7 @@ public class ActivityCompleted1 extends Activity {
         TextView txtview_before = (TextView) findViewById(R.id.beforeStateTextView);
         SharedPreferences actvt = getSharedPreferences("activity",0);
         String beforeStateStr = actvt.getString("beforeStressState","");
-        txtview_before.setText(beforeStateStr);
 
-        beforeState = setStressState(beforeStateStr);
-
-        /*현재 스트레스 상태 여기에!*/
-        nowState = setStressState(ActivityMainNavi.getCurrentStressState());
 
         TextView txtview_now = (TextView)findViewById(R.id.nowStateTextView);
 
@@ -37,6 +32,13 @@ public class ActivityCompleted1 extends Activity {
         Button btn_yes = (Button) findViewById(R.id.button_yes);
         Button btn_no = (Button)findViewById(R.id.button_no);
 
+
+        beforeState = setStressState(beforeStateStr);
+        txtview_before.setText(beforeStateStr);
+        /*현재 스트레스 상태 여기에!*/
+        nowState = setStressState(ActivityMainNavi.getCurrentStressState());
+        txtview_now.setText(ActivityMainNavi.getCurrentStressState());
+
         SharedPreferences setting = getSharedPreferences("setting", 0);
         SharedPreferences.Editor editor = setting.edit();
         DetailString dstr = new DetailString(setting);
@@ -44,7 +46,8 @@ public class ActivityCompleted1 extends Activity {
         int cat = dstr.getCategoryFromString(actvtName);
         String weightname = "weight"+String.valueOf(cat);
         int weightvalue = setting.getInt(weightname,DetailString.defaultWeight);
-        if (beforeState < nowState) {
+        System.out.println("state(b, n): "+beforeState+","+nowState);
+        if (beforeState > nowState) {
             txtview.setText(getResources().getString(R.string.completed_good));
             btn_yes.setVisibility(View.INVISIBLE);
             btn_no.setVisibility(View.INVISIBLE);
@@ -101,7 +104,7 @@ public class ActivityCompleted1 extends Activity {
     }
 
     private int setStressState(String compareState) {
-        if (compareState.equals(getResources().getString(R.string.stress_high))) return 0;
+        if (compareState.equals(getResources().getString(R.string.stress_no))) return 0;
         else if (compareState.equals(getResources().getString(R.string.stress_one_spoon))) return 1;
         else if (compareState.equals(getResources().getString(R.string.stress_high))) return 2;
         else return -1;

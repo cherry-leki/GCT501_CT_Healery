@@ -23,7 +23,7 @@ public class HeartRateConst {
             else if(age < THRITYSIX_TO_FOURTYFIVE) result = new int[]{69, 78, 85};
             else if(age < FOURTYSIX_TO_FIFTYFIVE) result = new int[]{69, 77, 84};
             else if(age < FIFTYSIX_TO_SIXTYFIVE) result = new int[]{68, 76, 84};
-            else  result = new int[]{68, 85};
+            else  result = new int[]{68, 76, 85};
         }
         return result;
     }
