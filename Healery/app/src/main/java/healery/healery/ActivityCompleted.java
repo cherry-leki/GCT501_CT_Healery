@@ -1,4 +1,4 @@
-package healery.gadgetbridge.healery;
+package healery.healery;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,12 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import healery.gadgetbridge.R;
 
-public class ActivityCompleted1 extends Activity {
+public class ActivityCompleted extends Activity {
 
     private String nowStateStr;
     private int beforeState, nowState;
@@ -89,7 +88,7 @@ public class ActivityCompleted1 extends Activity {
                 SharedPreferences.Editor editor = actvt.edit();
                 editor.putString("beforeStressState",((TextView)findViewById(R.id.nowStateTextView)).getText().toString());
                 editor.commit();
-                Intent intent = new Intent(ActivityCompleted1.this, ActivityRecommend.class);
+                Intent intent = new Intent(ActivityCompleted.this, ActivityRecommend.class);
                 startActivity(intent);
                 finish();
                 return;
@@ -98,7 +97,7 @@ public class ActivityCompleted1 extends Activity {
         btn_no.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 ActivityMainNavi.isMissionGoing = false;
-                Intent intent = new Intent(ActivityCompleted1.this, ActivityMainNavi.class);
+                Intent intent = new Intent(ActivityCompleted.this, ActivityMainNavi.class);
                 startActivity(intent);
                 finish();
                 return;

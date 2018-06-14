@@ -1,4 +1,4 @@
-package healery.gadgetbridge.healery;
+package healery.healery;
 
 import android.app.Application;
 import android.content.SharedPreferences;

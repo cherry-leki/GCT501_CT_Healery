@@ -1,4 +1,4 @@
-package healery.gadgetbridge.healery;
+package healery.healery;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -24,7 +24,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,13 +37,9 @@ import healery.gadgetbridge.R;
 import healery.gadgetbridge.activities.ControlCenterv2;
 import healery.gadgetbridge.activities.HealeryActivity;
 import healery.gadgetbridge.activities.HeartRateUtils;
-import healery.gadgetbridge.devices.miband.MiBand2Service;
 import healery.gadgetbridge.entities.MiBandActivitySample;
 import healery.gadgetbridge.model.ActivitySample;
 import healery.gadgetbridge.model.DeviceService;
-import healery.gadgetbridge.model.NotificationSpec;
-import healery.gadgetbridge.model.NotificationType;
-import healery.gadgetbridge.util.GB;
 
 import static healery.gadgetbridge.util.GB.NOTIFICATION_CHANNEL_ID;
 
@@ -337,7 +332,7 @@ public class ActivityMainNavi extends AppCompatActivity
         } else if (heartRate > warnStressLevel){
             if(steps < 40) {
                 if (stressCount < 2) stressCount++;
-                else stressCount = 3;
+                else if (stressCount > 3) stressCount--;
             }
         } else if (heartRate < goodStressLevel){
             stressCount--;

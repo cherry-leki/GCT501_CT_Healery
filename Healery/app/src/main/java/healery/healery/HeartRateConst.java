@@ -1,4 +1,4 @@
-package healery.gadgetbridge.healery;
+package healery.healery;
 
 public class HeartRateConst {
     // age

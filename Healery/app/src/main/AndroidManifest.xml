@@ -394,7 +394,7 @@
             android:exported="true"></service>
 
         <!-- healery activity -->
-        <activity android:name=".healery.First"
+        <activity android:name="healery.healery.First"
             android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoTitle">
@@ -408,19 +408,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".healery.ActivityRecommend"
+            android:name="healery.healery.ActivityRecommend"
             android:theme="@style/AppTheme.NoTitle"/>
 
         <activity
-            android:name=".healery.ActivityPerform"
+            android:name="healery.healery.ActivityPerform"
             android:theme="@style/AppTheme.NoTitle"/>
 
         <activity
-            android:name=".healery.ActivityCompleted1"
+            android:name="healery.healery.ActivityCompleted"
             android:theme="@style/AppTheme.NoTitle"/>
 
         <activity
-            android:name=".healery.ActivityMainNavi"
+            android:name="healery.healery.ActivityMainNavi"
             android:label="@string/title_activity_main_navi"
             android:theme="@style/AppTheme.NoTitle"
             android:launchMode="singleInstance"

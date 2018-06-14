@@ -1,16 +1,13 @@
-package healery.gadgetbridge.healery;
+package healery.healery;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import healery.gadgetbridge.R;
 
@@ -33,7 +30,7 @@ public class ActivityPerform extends AppCompatActivity {
         btn_complete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(ActivityPerform.this, ActivityCompleted1.class);
+                Intent intent = new Intent(ActivityPerform.this, ActivityCompleted.class);
                 intent.putExtra("complete", true);
                 startActivity(intent);
                 finish();
@@ -43,7 +40,7 @@ public class ActivityPerform extends AppCompatActivity {
         btn_stop.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(ActivityPerform.this, ActivityCompleted1.class);
+                Intent intent = new Intent(ActivityPerform.this, ActivityCompleted.class);
                 intent.putExtra("complete", false);
                 startActivity(intent);
                 finish();
