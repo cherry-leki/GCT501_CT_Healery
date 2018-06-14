@@ -74,7 +74,7 @@ public class MiBandPreferencesActivity extends AbstractSettingsActivity {
 
         addPreferencesFromResource(R.xml.miband_preferences);
 
-        addTryListeners();
+        //addTryListeners();
 
         Prefs prefs = GBApplication.getPrefs();
 
@@ -408,23 +408,23 @@ public class MiBandPreferencesActivity extends AbstractSettingsActivity {
         });
     }
 
-    private void addTryListeners() {
-        for (final NotificationType type : NotificationType.values()) {
-            String prefKey = "mi_try_" + type.getGenericType();
-            final Preference tryPref = findPreference(prefKey);
-            if (tryPref != null) {
-                tryPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        tryVibration(type);
-                        return true;
-                    }
-                });
-            } else {
-                GB.toast(getBaseContext(), "Unable to find preference key: " + prefKey + ", trying the vibration won't work", Toast.LENGTH_LONG, GB.WARN);
-            }
-        }
-    }
+//    private void addTryListeners() {
+//        for (final NotificationType type : NotificationType.values()) {
+//            String prefKey = "mi_try_" + type.getGenericType();
+//            final Preference tryPref = findPreference(prefKey);
+//            if (tryPref != null) {
+//                tryPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//                    @Override
+//                    public boolean onPreferenceClick(Preference preference) {
+//                        tryVibration(type);
+//                        return true;
+//                    }
+//                });
+//            } else {
+//                GB.toast(getBaseContext(), "Unable to find preference key: " + prefKey + ", trying the vibration won't work", Toast.LENGTH_LONG, GB.WARN);
+//            }
+//        }
+//    }
 
     private void tryVibration(NotificationType type) {
         NotificationSpec spec = new NotificationSpec();
